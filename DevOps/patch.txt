@@ -1,0 +1,17 @@
+FilePatcher
+<
+from: 
+any
+to: 
+any
+hash:
+none
+>
+
+change
+<
+from:
+wordz
+to:
+words
+>
