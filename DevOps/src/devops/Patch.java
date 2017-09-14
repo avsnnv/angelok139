@@ -46,6 +46,7 @@ public class Patch {
                 switch(s){
                     case("<"):{
                         while(operationFile.ready()&&!operationFile.readLine().equals(">"));
+                        break;
                     }
                     case("change"):{
                         queue.add(new Change(operationFile));
