@@ -32,6 +32,7 @@ public class Change implements Operator {
 
     @Override
     public String process(String input) {
-        return null;
+        input=input.replace(from,to);
+        return input;
     }
 }

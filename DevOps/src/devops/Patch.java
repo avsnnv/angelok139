@@ -56,11 +56,24 @@ public class Patch {
                         break;
                 }
             }
+            operationFile.close();
+            while (inputFile.ready()){
+                String str=inputFile.readLine();
+                for(Operator opr:queue)
+                    str=opr.process(str);
+            outputFile.write(str+"\n");
+
+            }
+            inputFile.close();
+            outputFile.close();
         }
         catch (IOException e){
             logger.IOError();
             return;
         }
+
+
+
         System.out.println("Bye");
 
     }
