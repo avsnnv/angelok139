@@ -35,4 +35,9 @@ public class Change implements Operator {
         input=input.replace(from,to);
         return input;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode()+from.hashCode()+to.hashCode();
+    }
 }

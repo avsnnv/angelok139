@@ -11,6 +11,7 @@ public class Patch {
     private static BufferedReader inputFile;
     private static BufferedWriter outputFile;
     private static BufferedReader operationFile;
+    private static String operationFileHashCode;
     private static ArrayList<Operator> queue=new ArrayList<>();
 
     public static Logger getLogger() {
@@ -18,7 +19,7 @@ public class Patch {
     }
 
     public static void main(String[] args){
-        System.out.println("File processor");
+        System.out.println("Patch file processor v0.0.1alpha. Alexander Vykhrishuk 2017. Free for any use\n");
         logger=new Logger();
         Settings setting=new Settings(args);
         if(setting.getStatus()<1)
@@ -52,11 +53,31 @@ public class Patch {
                         queue.add(new Change(operationFile));
                         break;
                     }
+                    case("FilePatcher"):{
+                        String s2="";
+                        while(operationFile.ready()&&!s2.equals(">")){
+                            s2=operationFile.readLine();
+                            if(s2.equals("hash:")) {
+                                operationFileHashCode = operationFile.readLine();
+                                s2=operationFileHashCode;
+                            }
+                        }
+                        break;
+
+                    }
+
                     default:
                         break;
                 }
             }
             operationFile.close();
+            HashCode hashCode=new HashCode(queue);
+          //  System.out.println("HashCode: "+hashCode.getHashCode());
+            if(!operationFileHashCode.equals(hashCode.getHashCode())){
+                throw new RuntimeException("Wrong Hashcode in patch file, sorry");
+            }
+            else
+                System.out.println("Hashcode OK");
             while (inputFile.ready()){
                 String str=inputFile.readLine();
                 for(Operator opr:queue)
