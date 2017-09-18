@@ -53,6 +53,10 @@ public class Patch {
                         queue.add(new Change(operationFile));
                         break;
                     }
+                    case("delete"):{
+                        queue.add(new Delete(operationFile));
+                        break;
+                    }
                     case("FilePatcher"):{
                         String s2="";
                         while(operationFile.ready()&&!s2.equals(">")){
@@ -72,7 +76,7 @@ public class Patch {
             }
             operationFile.close();
             HashCode hashCode=new HashCode(queue);
-          //  System.out.println("HashCode: "+hashCode.getHashCode());
+            System.out.println("HashCode: "+hashCode.getHashCode());
             if(!operationFileHashCode.equals(hashCode.getHashCode())){
                 throw new RuntimeException("Wrong Hashcode in patch file, sorry");
             }
