@@ -61,6 +61,10 @@ public class Patch {
                         queue.add(new AddWord(operationFile));
                         break;
                     }
+                    case("addLine"):{
+                        queue.add(new AddLine(operationFile));
+                        break;
+                    }
                     case("FilePatcher"):{
                         String s2="";
                         while(operationFile.ready()&&!s2.equals(">")){

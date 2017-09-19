@@ -59,6 +59,6 @@ public class AddWord implements Operator {
 
     @Override
     public int hashCode() {
-        return super.hashCode()+before.hashCode()+after.hashCode();
+        return super.hashCode()+before.hashCode()+after.hashCode()+insString.hashCode();
     }
 }
