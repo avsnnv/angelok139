@@ -38,6 +38,6 @@ public class Change implements Operator {
 
     @Override
     public int hashCode() {
-        return super.hashCode()+from.hashCode()+to.hashCode();
+        return from.hashCode()+to.hashCode();
     }
 }

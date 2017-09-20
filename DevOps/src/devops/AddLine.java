@@ -38,6 +38,6 @@ public class AddLine implements Operator{
     }
     @Override
     public int hashCode() {
-        return super.hashCode()+after.hashCode()+insString.hashCode();
+        return after.hashCode()+insString.hashCode();
     }
 }

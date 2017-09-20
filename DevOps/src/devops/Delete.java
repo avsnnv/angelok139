@@ -33,6 +33,6 @@ public class Delete implements Operator {
 
     @Override
     public int hashCode() {
-        return super.hashCode()+toDelete.hashCode();
+        return toDelete.hashCode();
     }
 }
