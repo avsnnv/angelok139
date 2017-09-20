@@ -57,7 +57,7 @@ public class Settings {
                 }
             }
         }
-        if(inputFile!=null&&outputFile!=null&&operationFile!=null)
+        if(inputFile!=null&&outputFile!=null)
             status++;
 
     }

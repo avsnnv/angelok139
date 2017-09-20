@@ -11,7 +11,7 @@ public class Patch {
     private static BufferedReader inputFile;
     private static BufferedWriter outputFile;
     private static BufferedReader operationFile;
-    private static String operationFileHashCode;
+    private static String operationFileHashCode="0";
     private static ArrayList<Operator> queue=new ArrayList<>();
 
     public static Logger getLogger() {
@@ -26,7 +26,9 @@ public class Patch {
             throw new RuntimeException(logger.incArgs());
         try {
             inputFile = new BufferedReader(new FileReader(setting.getInputFile()));
-            operationFile = new BufferedReader(new FileReader(setting.getOperationFile()));
+            if(setting.getOperationFile()!=null) {
+                operationFile = new BufferedReader(new FileReader(setting.getOperationFile()));
+            }
         }
         catch (FileNotFoundException e){
             logger.fileNotFound();
@@ -39,39 +41,42 @@ public class Patch {
             logger.IOError();
             return;
         }
-
-        // Form Queue
         try {
+        // Form Queue
+
+
+            if(setting.getOperationFile()!=null){
+
             while (operationFile.ready()) {
-                String s=operationFile.readLine();
-                switch(s){
-                    case("<"):{
-                        while(operationFile.ready()&&!operationFile.readLine().equals(">"));
+                String s = operationFile.readLine();
+                switch (s) {
+                    case ("<"): {
+                        while (operationFile.ready() && !operationFile.readLine().equals(">")) ;
                         break;
                     }
-                    case("change"):{
+                    case ("change"): {
                         queue.add(new Change(operationFile));
                         break;
                     }
-                    case("delete"):{
+                    case ("delete"): {
                         queue.add(new Delete(operationFile));
                         break;
                     }
-                    case("addWord"):{
+                    case ("addWord"): {
                         queue.add(new AddWord(operationFile));
                         break;
                     }
-                    case("addLine"):{
+                    case ("addLine"): {
                         queue.add(new AddLine(operationFile));
                         break;
                     }
-                    case("FilePatcher"):{
-                        String s2="";
-                        while(operationFile.ready()&&!s2.equals(">")){
-                            s2=operationFile.readLine();
-                            if(s2.equals("hash:")) {
+                    case ("FilePatcher"): {
+                        String s2 = "";
+                        while (operationFile.ready() && !s2.equals(">")) {
+                            s2 = operationFile.readLine();
+                            if (s2.equals("hash:")) {
                                 operationFileHashCode = operationFile.readLine();
-                                s2=operationFileHashCode;
+                                s2 = operationFileHashCode;
                             }
                         }
                         break;
@@ -83,6 +88,10 @@ public class Patch {
                 }
             }
             operationFile.close();
+        }
+            //add variables translate
+            queue.add(new VariableTranslate());
+
             HashCode hashCode=new HashCode(queue);
             System.out.println("HashCode: "+hashCode.getHashCode());
             if(!operationFileHashCode.equals(hashCode.getHashCode())){
