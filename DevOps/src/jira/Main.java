@@ -1,6 +1,8 @@
 package jira;
 
 
+import devops.Logger;
+
 public class Main {
 
     // Args
@@ -8,6 +10,7 @@ public class Main {
     //
 
     public static void main(String[] args) throws Exception {
+        Logger logger=new Logger();
 
         if(args.length>0) {
             switch (args[0]) {
@@ -23,6 +26,9 @@ public class Main {
                         System.out.println(issue.addAttachment(args[i]));
                 }
             }
+        }
+        else{
+            throw new RuntimeException(logger.incArgs());
         }
     }
 }
