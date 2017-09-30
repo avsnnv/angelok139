@@ -5,5 +5,5 @@ source /etc/profile.d/rvm.sh
 rvm requirements
 rvm install 2.4.1
 rvm use 2.4.1 --default
-gem install bundler -V --no-ri --no-rdoc
+/usr/local/rvm/rubies/ruby-2.4.1/bin/gem/gem install bundler -V --no-ri --no-rdoc
 
