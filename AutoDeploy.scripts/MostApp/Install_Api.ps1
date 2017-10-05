@@ -54,6 +54,8 @@ Move-Item Global.asax $path_api\
 Remove-Item  $path_api\packages.config
 Move-Item packages.config $path_api\
 
+Remove-Item  $path_api\Web.config
+Move-Item Web.config $path_api\
 
 
 #Remove-Item  $path_api\Web.config
