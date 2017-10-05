@@ -2,7 +2,7 @@
 
 echo "Begin Download and Extract $Filename on $server"
 
-Invoke-Command -ComputerName $server -ScriptBlock { param[String] $Filename
+Invoke-Command -ComputerName $server -ScriptBlock { param($Filename)
 Remove-Item -Recurse -Force c:\temp
 New-Item c:\temp -ItemType Directory
 
