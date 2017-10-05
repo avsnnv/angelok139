@@ -2,8 +2,10 @@
 echo "Install API on $server release $Release to $path_api"
 
 Invoke-Command -ComputerName $server -ScriptBlock {
-param($Release,$path_api)
+param([String]$Release,[String]$path_api)
 
+#echo $Release
+#echo $path_api
 cd c:\temp\Most.Core\Most.Core.API
 #$path_api="c:\AutoDeploy\API"
 
@@ -57,4 +59,4 @@ Move-Item packages.config $path_api\
 Remove-Item  $path_api\Web.config
 Move-Item Web.$Release.config $path_api\
 Rename-Item $path_api\Web.Release.config $path_api\Web.config
-} -Args -release $Release -patch_api $path_api
+} -ArgumentList $Release,$path_api
