@@ -56,7 +56,8 @@ Move-Item packages.config $path_api\
 
 
 
-Remove-Item  $path_api\Web.config
-Move-Item Web.$Release.config $path_api\
-Rename-Item $path_api\Web.$Release.config $path_api\Web.config
+#Remove-Item  $path_api\Web.config
+
+#Move-Item Web.$Release.config $path_api\
+#Rename-Item $path_api\Web.$Release.config $path_api\Web.config
 } -ArgumentList $Release,$path_api
