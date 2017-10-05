@@ -1,0 +1,2 @@
+﻿javac DevOps\src\devops\*
+java -cp .\DevOps\src devops.Patch --inputfile=.\Most.Core\Most.Core.API\Web.Debug.config --outputfile=.\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
