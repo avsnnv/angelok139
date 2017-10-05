@@ -11,10 +11,8 @@ cd c:\temp
 git clone https://github.com/angelok139/angelok139
 cd angelok139
 javac DevOps\src\devops\*
-java -cp .\DevOps\src devops.Patch --inputfile=..\Most.Core\Most.Core.API\Web.Debug.config --outputfile=..\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
+java -cp .\DevOps\src devops.Patch --inputfile=..\Most.Core\Most.Core.API\Web.$Release.config --outputfile=..\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
 
-#javac DevOps\src\devops\*
-#java -cp .\DevOps\src devops.Patch --inputfile=..\Most.Core\Most.Core.API\Web.Debug.config --outputfile=..\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
 cd c:\temp\Most.Core\Most.Core.API
 #$path_api="c:\AutoDeploy\API"
 
