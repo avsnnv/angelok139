@@ -8,8 +8,8 @@ Copy-Item Most.Core\Most.Core.API.Services\App.$Release.config Most.Core\Most.Co
 Remove-Item -force Most.Core\Most.Core.API.Services\bin\$Release\NLog.config
 Copy-Item Most.Core\Most.Core.API.Services\NLog.$Release.config Most.Core\Most.Core.API.Services\bin\$Release\NLog.config
 
-javac DevOps\src\devops\*
-java -cp .\DevOps\src devops.Patch --inputfile=.\Most.Core\Most.Core.API\Web.Debug.config --outputfile=.\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
+#javac DevOps\src\devops\*
+#java -cp .\DevOps\src devops.Patch --inputfile=.\Most.Core\Most.Core.API\Web.Debug.config --outputfile=.\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.API
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.API.Services
