@@ -1,6 +1,6 @@
 ﻿param([String]$Filename,[String]$Release)
 
-echo Prepare and Archive Distributive release for $Release enviropment to $Filename
+echo "Prepare and Archive Distributive for $Release enviropment to $Filename"
 
 Remove-Item -force Most.Core\Most.Core.API.Services\bin\$Release\Most.Core.API.Services.exe.config
 Copy-Item Most.Core\Most.Core.API.Services\App.$Release.config Most.Core\Most.Core.API.Services\bin\$Release\Most.Core.API.Services.exe.config
