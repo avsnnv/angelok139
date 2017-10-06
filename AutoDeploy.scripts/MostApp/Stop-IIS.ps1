@@ -1,4 +1,4 @@
-﻿param([String]$server)
+﻿param($server)
 echo "Begin stopping IIS on $server"
 
 Invoke-Command -ComputerName $server -ScriptBlock  {
