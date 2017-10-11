@@ -1,8 +1,5 @@
-#! /bin/sh
+#! /bin/bash
 
-yum install git -y
-git clone https://github.com/angelok139/angelok139
-angelok139/AutoDeploy.scripts/install_ruby.sh
-angelok139/AutoDeploy.scripts/install_mongodb.sh
-angelok139/AutoDeploy.scripts/deploy.sh
-
+export PATH=/usr/local/rvm/rubies/ruby-2.4.1/bin:$PATH
+cd /usr/share/reddit
+puma -d
