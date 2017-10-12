@@ -1,0 +1,10 @@
+[Unit]
+Description=Puma Service
+
+[Service]
+ExecStart=/usr/share/reddit/deploy.sh
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+
