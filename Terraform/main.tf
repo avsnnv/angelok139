@@ -1,16 +1,17 @@
 provider "google" {
   project = "infra-182709"
-  region = "europe-west1"
+  region = "asia-northeast1-a"
+  version = "0.1.3"
 }
 
 resource "google_compute_instance" "app" {
   name		= "reddit-app"
   machine_type 	= "g1-small"
-  zone		= "europe-west1-b"
+  zone		= "asia-northeast1-a"
   tags = ["reddit-app"]
   boot_disk {
     initialize_params {
-      image = "reddit-base-1507817872"
+      image = "reddit-base-1507899498"
     }
   }
   network_interface {
@@ -20,14 +21,21 @@ resource "google_compute_instance" "app" {
   metadata {
     sshKeys = "avih:${file("~/.ssh/id_rsa.pub")}"
   }
+
+  connection {
+    timeout     = "5m"
+    user	= "avih"
+    private_key = "${file("~/.ssh/id_rsa")}"
+  }
+
   provisioner "file" {
     source = "../AutoDeploy.scripts/pumad.service"
     destination = "/tmp/pumad.service"
   }
 
-  provisioner "file" {
-    source = "../AutoDeploy.scripts/auto_deploy.sh"
-    destination = "/usr/share/reddit/deploy.sh"
+
+  provisioner "remote-exec" {
+    script = "../AutoDeploy.scripts/auto_deploy.sh"
   }
 
 }

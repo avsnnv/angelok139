@@ -1,5 +1,6 @@
 #! /bin/bash
 
-export PATH=/usr/local/rvm/rubies/ruby-2.4.1/bin:$PATH
-cd /usr/share/reddit
-puma 
+sudo cp /tmp/pumad.service /etc/systemd/system/pumad.service
+sudo systemctl enable pumad
+sudo systemctl start pumad
+
