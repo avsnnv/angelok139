@@ -11,10 +11,10 @@
 {
 "type": "googlecompute",
 "project_id": "{{user `proj_id`}}",
-"image_name": "reddit-base-{{timestamp}}",
+"image_name": "reddit-app-{{timestamp}}",
 "source_image": "{{user `image`}}",
 "zone": "europe-west1-b",
-"ssh_username": "appuser",
+"ssh_username": "avih",
 "machine_type": "{{user `machine_t`}}"
 }
 ],
@@ -23,11 +23,6 @@
 {
 "type": "shell",
 "script": "/home/avih/repo/angelok139/AutoDeploy.scripts/install_ruby.sh",
-"execute_command": "sudo {{.Path}}"
-},
-{
-"type": "shell",
-"script": "/home/avih/repo/angelok139/AutoDeploy.scripts/install_mongodb.sh",
 "execute_command": "sudo {{.Path}}"
 },
 {

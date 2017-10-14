@@ -17,10 +17,6 @@ variable private_key_path {
   default     = "~/.ssh/id_rsa"
 }
 
-variable app_disk_image {
-  description = "Application disk image"
-  default = "reddit-app-1508008884"
-}
 variable db_disk_image {
   description = "Application disk image"
   default = "reddit-db-1508008892"
