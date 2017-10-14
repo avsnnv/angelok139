@@ -7,7 +7,7 @@ provider "google" {
 resource "google_compute_instance" "app" {
   name         = "reddit-app"
   machine_type = "g1-small"
-  zone         = "asia-northeast1-a"
+  zone         = "${var.region}"
   tags         = ["reddit-app"]
 
   boot_disk {
