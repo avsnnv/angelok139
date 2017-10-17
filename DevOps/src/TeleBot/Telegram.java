@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
@@ -16,11 +15,7 @@ public class Telegram {
     private String token = "471952952:AAH0JeD6D2E43jsSJ5kcLMkzeHI9Wac86H0"; //Must be parametized
 
     public Telegram() {
-        try {
 
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
     }
 
 
