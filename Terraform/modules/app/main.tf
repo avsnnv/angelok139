@@ -1,5 +1,5 @@
 resource "google_compute_instance" "app" {
-  name         = "reddit-app"
+  name         = "reddit-app-${var.envir}"
   machine_type = "g1-small"
   zone         = "${var.region}-b"
   tags         = ["reddit-app"]
@@ -29,21 +29,21 @@ resource "google_compute_instance" "app" {
   }
 
   provisioner "file" {
-    source      = "../AutoDeploy.scripts/pumad.service"
+    source      = "../../AutoDeploy.scripts/pumad.service"
     destination = "/tmp/pumad.service"
   }
 
   provisioner "remote-exec" {
-    script = "../AutoDeploy.scripts/auto_deploy.sh"
+    script = "../../AutoDeploy.scripts/auto_deploy.sh"
   }
 }
 
 resource "google_compute_address" "appip" {
-  name = "appip"
+  name = "appip-${var.envir}"
 }
 
 resource "google_compute_firewall" "firewall_puma" {
-  name    = "allow-puma-default"
+  name    = "allow-puma-default-${var.envir}"
   network = "default"
 
   allow {

@@ -26,3 +26,13 @@ variable db_disk_image {
   default = "reddit-db-1508008892"
 }
 
+variable source_range {
+  description = "Source range"
+  default = ["0.0.0.0/0"]
+}
+
+variable envir {
+  description = "Enviropment"
+  default = "stage"
+}
+

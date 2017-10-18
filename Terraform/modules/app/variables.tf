@@ -22,3 +22,7 @@ variable app_disk_image {
   default = "reddit-app-1508008884"
 }
 
+variable envir {
+  description = "Enviropment"
+  default = "stage"
+}
