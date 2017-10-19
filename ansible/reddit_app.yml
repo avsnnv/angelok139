@@ -22,20 +22,36 @@
 - name: "Reddit App: Install mongodb"
   hosts: reddit_db
   gather_facts: no
-
+  become: yes
+  
   tasks:
-  - name: Install mongodb package
-    debug:
-      msg: "В этом сценарии нужно добавить модули для установки mongodb, после можно удалить вызов модуля debug, который выводит это сообщение"
+  
+  - name: Install mongodb
+    yum: "name=mongodb-server state=present"
+    
+  - name: Enable MongoDB server  
+    service: "name=mongod enabled=yes state=started"
+  
 
 # Deploy reddit app
 - name: "Reddit App: Deploy application"
   hosts: reddit_app
   gather_facts: no
+  become: yes
 
   tasks:
-  - name: Remove me after adding real things
-    debug:
-      msg: "В этом сценарии нужно добавить модули для деплоя приложения, после можно удалить вызов модуля debug, который выводит это сообщение"
+  - name: Get App from git
+    git: "repo=https://github.com/Artemmkin/reddit.git dest=/usr/share/reddit"
 
+  - name: Install app bundles
+    bundler: "state=present gemfile=/usr/share/reddit/Gemfile"
+
+  - name: Copy service file
+    copy: "src=/home/avih/repo/angelok139/AutoDeploy.scripts/pumad.service dest=/etc/systemd/system/pumad.service"
+
+    #  - name: Add ServerIP
+    # raw: echo "export SERVER_IP=104.155.21.139" >>/etc/bash.bashrc
+
+  - name: Enable PumaD
+    service: "name=pumad enabled=yes state=started"
 

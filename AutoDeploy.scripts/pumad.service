@@ -2,6 +2,7 @@
 Description=Puma Service
 
 [Service]
+Enviropment=SERVER_IP=104.155.21.139
 Type=simple
 #EnvironmentFile=/home/avih/db_config
 User=avih
