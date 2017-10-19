@@ -12,8 +12,8 @@ robocopy SirenaTravelProxyGateWcf\bin\$Release $path_Sirena\bin
 #java -cp .\angelok139\DevOps\src devops.Patch --inputfile=\Web.$Release.config --outputfile=..\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.sirena.patch 
 
 
-Copy-Item SirenaTravelProxyGateWcf\Web.config C:\inetpub\wwwroot\services\sirena_wcf
-
+Copy-Item SirenaTravelProxyGateWcf\Web.config C:\inetpub\wwwroot\services\$path_Sirena
+#Copy-Item SirenaTravelProxyGateWcf\Web.config C:\inetpub\wwwroot\services\$path_Sirena
 
 #echo $Release
 #echo $path_api
