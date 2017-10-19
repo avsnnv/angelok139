@@ -1,0 +1,54 @@
+# Setup ruby
+- name: "Reddit App: Configure app enviropment"
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+  - name: Install ruby and rubygames and required packages
+    apt: "name={{ item }} state=present"
+    with_items:
+      - ruby-full
+      - ruby-dev
+      - build-essential
+      - git
+
+  - name: Install Ruby bundler
+    gem:
+      name: bundler
+      state: present
+      user_install: no
+
+# Deploy reddit app
+- name: "Reddit App: Deploy application"
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+  - name: Get App from git
+    git: "repo=https://github.com/Artemmkin/reddit.git dest=/usr/share/reddit"
+
+  - name: Install app bundles
+    bundler: "state=present gemfile=/usr/share/reddit/Gemfile"
+
+  - name: Copy service file
+    copy: "src=/home/avih/repo/angelok139/AutoDeploy.scripts/pumad.service dest=/etc/systemd/system/pumad.service"
+
+
+  - name: Enable PumaD
+    service: "name=pumad enabled=yes state=started"
+
+- name: "Reddit App: Install mongodb"
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+  - name: Install mongodb
+    apt: "name=mongodb-server state=present"
+
+  - name: Enable MongoDB server
+    service: "name=mongodb enabled=yes state=started"
+

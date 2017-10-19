@@ -21,14 +21,8 @@
 
 "provisioners": [
 {
-"type": "shell",
-"script": "/home/avih/repo/angelok139/AutoDeploy.scripts/install_ruby.sh",
-"execute_command": "sudo {{.Path}}"
-},
-{
-"type": "shell",
-"script": "/home/avih/repo/angelok139/AutoDeploy.scripts/deploy.sh",
-"execute_command": "sudo {{.Path}}"
+"type": "ansible",
+"playbook_file": "/home/avih/repo/angelok139/ansible/reddit_app.yml"
 }
 ]
 }

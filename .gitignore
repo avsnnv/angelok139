@@ -9,7 +9,6 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-.idea/
 
 
 # Package Files #
@@ -27,4 +26,4 @@ hs_err_pid*
 *.tfstate.backup
 *.tfvars
 .terraform/
-
+workspace.xml
