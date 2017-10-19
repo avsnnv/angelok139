@@ -1,0 +1,14 @@
+# Setup and configure mongodb for reddit app
+- name: "Reddit App: Install mongodb"
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+  - name: Install mongodb
+    yum: "name=mongodb-server state=present"
+
+  - name: Enable MongoDB server
+    service: "name=mongod enabled=yes state=started"
+

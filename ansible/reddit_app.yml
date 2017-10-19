@@ -1,6 +1,6 @@
 # Setup ruby
 - name: "Reddit App: Configure app enviropment"
-  hosts: reddit_app
+  hosts: all
   gather_facts: no
   become: yes
 
@@ -11,6 +11,7 @@
       - ruby-full
       - ruby-dev
       - build-essential
+      - git
 
   - name: Install Ruby bundler
     gem:
@@ -18,24 +19,9 @@
       state: present
       user_install: no
 
-# Setup and configure mongodb for reddit app
-- name: "Reddit App: Install mongodb"
-  hosts: reddit_db
-  gather_facts: no
-  become: yes
-  
-  tasks:
-  
-  - name: Install mongodb
-    yum: "name=mongodb-server state=present"
-    
-  - name: Enable MongoDB server  
-    service: "name=mongod enabled=yes state=started"
-  
-
 # Deploy reddit app
 - name: "Reddit App: Deploy application"
-  hosts: reddit_app
+  hosts: all
   gather_facts: no
   become: yes
 
@@ -49,9 +35,20 @@
   - name: Copy service file
     copy: "src=/home/avih/repo/angelok139/AutoDeploy.scripts/pumad.service dest=/etc/systemd/system/pumad.service"
 
-    #  - name: Add ServerIP
-    # raw: echo "export SERVER_IP=104.155.21.139" >>/etc/bash.bashrc
 
   - name: Enable PumaD
     service: "name=pumad enabled=yes state=started"
+
+- name: "Reddit App: Install mongodb"
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+  - name: Install mongodb
+    apt: "name=mongodb-server state=present"
+
+  - name: Enable MongoDB server
+    service: "name=mongodb enabled=yes state=started"
 
