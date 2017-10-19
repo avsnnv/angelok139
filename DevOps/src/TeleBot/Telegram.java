@@ -49,7 +49,8 @@ public class Telegram {
 
         }
         catch (Exception e) {
-            throw new RuntimeException();
+            System.out.println(e.getMessage());
+            return;
         }
     }
 }
