@@ -49,6 +49,8 @@ public class Telegram {
 
         }
         catch (Exception e) {
+            for(StackTraceElement stackTraceElement:e.getStackTrace())
+                System.out.println(stackTraceElement.getMethodName());
             System.out.println(e.getMessage());
             return;
         }
