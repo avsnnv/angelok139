@@ -17,14 +17,15 @@ class Telegram {
     private String token;
 
 
-    Telegram() {
+    Telegram(String configFile) {
         try {
             PropertiesConfiguration config = new PropertiesConfiguration();
-            config.read(new FileReader("config.properties"));
+            config.read(new FileReader(configFile));
 
             token = config.getString("token");
         }
         catch (Exception e){
+            System.out.println(e.getMessage());
             throw new RuntimeException();
         }
 

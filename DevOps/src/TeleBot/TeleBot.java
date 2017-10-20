@@ -9,8 +9,12 @@ public class TeleBot {
     }
 
     public static void main(String[] args){
+        if(args.length<1)
+        {
+            throw new RuntimeException("Usage: TeleBot config_file");
+        }
         WatchDog watchDog=new WatchDog();
-        telegram=new Telegram();
+        telegram=new Telegram(args[0]);
         Thread thread=new Thread(watchDog);
         thread.start();
 
