@@ -1,5 +1,7 @@
 package TeleBot;
 
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -7,26 +9,38 @@ import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class Telegram {
-    private String token = "471952952:AAH0JeD6D2E43jsSJ5kcLMkzeHI9Wac86H0"; //Must be parametized
+class Telegram {
+    private String token;
 
-    public Telegram() {
+
+    Telegram(String configFile) {
+        try {
+            PropertiesConfiguration config = new PropertiesConfiguration();
+            config.read(new FileReader(configFile));
+
+            token = config.getString("token");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException();
+        }
 
     }
 
 
-    public JSONObject getUpdates() {
-        String result="";
+    JSONObject getUpdates() {
+        StringBuilder result=new StringBuilder();
         try {
             HttpsURLConnection url = (HttpsURLConnection) new URL("https://api.telegram.org/bot" + token + "/getUpdates").openConnection();
             url.setRequestMethod("GET");
             url.setDoInput(true);
             BufferedReader dis = new BufferedReader(new InputStreamReader(url.getInputStream()));
                 while (dis.ready()) {
-                    result += dis.readLine();
+                    result.append(dis.readLine());
                 }
             dis.close();
             url.disconnect();
@@ -37,19 +51,21 @@ public class Telegram {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
-    return new JSONObject(result);
+    return new JSONObject(result.toString());
     }
 
-    public void sendMessage(String chat_id,String text){
+    int sendMessage(String chat_id,String text){
         try {
             HttpPost httpPost=new HttpPost("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + text);
             CloseableHttpClient httpClient= HttpClients.createDefault();
-            httpClient.execute(httpPost);
-            httpClient.close();
+            CloseableHttpResponse response=httpClient.execute(httpPost);
 
+            httpClient.close();
+            return response.getStatusLine().getStatusCode();
         }
         catch (Exception e) {
-            throw new RuntimeException();
+            System.out.println(e.getMessage());
+            return 500;
         }
     }
 }
