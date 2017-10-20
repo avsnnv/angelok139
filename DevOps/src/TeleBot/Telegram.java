@@ -1,5 +1,6 @@
 package TeleBot;
 
+import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -8,13 +9,24 @@ import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
 class Telegram {
-    private String token = "471952952:AAH0JeD6D2E43jsSJ5kcLMkzeHI9Wac86H0"; //Must be parametized
+    private String token;
+
 
     Telegram() {
+        try {
+            PropertiesConfiguration config = new PropertiesConfiguration();
+            config.read(new FileReader("config.properties"));
+
+            token = config.getString("token");
+        }
+        catch (Exception e){
+            throw new RuntimeException();
+        }
 
     }
 
