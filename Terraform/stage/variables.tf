@@ -19,11 +19,11 @@ variable private_key_path {
 
 variable app_disk_image {
   description = "Application disk image"
-  default = "reddit-app-1508008884"
+  default = "reddit-app-1508754601"
 }
 variable db_disk_image {
   description = "Application disk image"
-  default = "reddit-db-1508008892"
+  default = "reddit-db-1508754809"
 }
 
 variable source_range {
