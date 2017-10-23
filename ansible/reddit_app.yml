@@ -1,54 +1,69 @@
-# Setup ruby
-- name: "Reddit App: Configure app enviropment"
+---
+- name: Configure hosts & deploy
   hosts: all
-  gather_facts: no
-  become: yes
-
+  vars:
+          mongo_bind_ip: 0.0.0.0
+          db_host: 10.132.0.2
+          
   tasks:
-  - name: Install ruby and rubygames and required packages
-    apt: "name={{ item }} state=present"
-    with_items:
-      - ruby-full
-      - ruby-dev
-      - build-essential
-      - git
+  - name: Change mongo config file
+    become: true
+    template:
+           src: templates/mongod.conf.j2
+           dest: /etc/mongod.conf
+           mode: 0644
+    tags: db-tag
+    notify: restart mongod
+  
+  - name: Fetch latest Distr
+    become: yes
+    git:
+            repo: 'https://github.com/Artemmkin/reddit.git'
+            dest: /usr/share/reddit
+            version: monolith
+            force: yes
+    tags: deploy-tag
+    notify: reload puma
 
-  - name: Install Ruby bundler
-    gem:
-      name: bundler
-      state: present
-      user_install: no
+  - name: Bundle install
+    become: yes
+    bundler:
+            state: present
+            chdir: /usr/share/reddit
+    tags: deploy-tag
 
-# Deploy reddit app
-- name: "Reddit App: Deploy application"
-  hosts: all
-  gather_facts: no
-  become: yes
+  - name: Add unit file for Puma
+    become: true
+    copy:
+            src: files/pumad.service
+            dest: /etc/systemd/system/pumad.service
+    tags: app-tag
+    notify: reload puma
 
-  tasks:
-  - name: Get App from git
-    git: "repo=https://github.com/Artemmkin/reddit.git dest=/usr/share/reddit"
+  - name: Add config for DB connection
+    template:
+            src: templates/db_config.j2
+            dest: /home/avih/db_config
+    tags: app-tag
 
-  - name: Install app bundles
-    bundler: "state=present gemfile=/usr/share/reddit/Gemfile"
+  - name: enable puma
+    become: true
+    systemd:
+             name: pumad
+             enabled: yes
+    tags: app-tag
 
-  - name: Copy service file
-    copy: "src=/home/avih/repo/angelok139/AutoDeploy.scripts/pumad.service dest=/etc/systemd/system/pumad.service"
 
+  handlers:
+  - name: restart mongod
+    become: true
+    service:
+            name: mongod
+            state: restarted
 
-  - name: Enable PumaD
-    service: "name=pumad enabled=yes state=started"
-
-- name: "Reddit App: Install mongodb"
-  hosts: all
-  gather_facts: no
-  become: yes
-
-  tasks:
-
-  - name: Install mongodb
-    apt: "name=mongodb-server state=present"
-
-  - name: Enable MongoDB server
-    service: "name=mongodb enabled=yes state=started"
-
+  - name: reload puma
+    become: true
+    systemd:
+            name: pumad
+            daemon_reload: yes
+            state: restarted
