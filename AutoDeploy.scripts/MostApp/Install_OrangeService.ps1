@@ -8,6 +8,6 @@ cd c:\temp\Most.Core\Most.Core.OrangeDataService
 
 robocopy bin $path_Orange
 
-Copy-Item Web.$Release.config $path_Sirena\Web.config
+Copy-Item Web.$Release.config $path_Orange\Web.config
 
 } -ArgumentList $Release,$path_Orange
