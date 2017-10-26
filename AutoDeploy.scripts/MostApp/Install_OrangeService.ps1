@@ -11,5 +11,6 @@ robocopy OrangeData $path_Orange\OrangeData
 robocopy OrangeService $path_Orange\OrangeService
 
 Copy-Item Web.$Release.config $path_Orange\Web.config
+robocopy Keys.$Release\* C:\OrangeCert
 
 } -ArgumentList $Release,$path_Orange
