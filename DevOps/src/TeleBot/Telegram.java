@@ -51,11 +51,13 @@ class Telegram {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
-    return new JSONObject(result.toString());
+        return new JSONObject(result.toString());
     }
 
     int sendMessage(String chat_id,String text){
         try {
+            text=text.replace(" ","%20");
+            text=text.replace("\n","%0A");
             HttpPost httpPost=new HttpPost("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + text);
             CloseableHttpClient httpClient= HttpClients.createDefault();
             CloseableHttpResponse response=httpClient.execute(httpPost);

@@ -4,7 +4,7 @@ public class TeleBot {
 
     private static Telegram telegram;
 
-    public static Telegram getTelegram() {
+    static Telegram getTelegram() {
         return telegram;
     }
 
@@ -13,9 +13,8 @@ public class TeleBot {
         {
             throw new RuntimeException("Usage: TeleBot config_file");
         }
-        WatchDog watchDog=new WatchDog();
         telegram=new Telegram(args[0]);
-        Thread thread=new Thread(watchDog);
+        Thread thread=new Thread(new WatchDog());
         thread.start();
 
     }

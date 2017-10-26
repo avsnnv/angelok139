@@ -12,8 +12,8 @@ public class WatchDog implements Runnable {
             try {
                 JSONObject jsonObject = TeleBot.getTelegram().getUpdates();
 
-                JSONArray resultJ=(JSONArray)jsonObject.get("result");
-                if(resultJ.length()>0) {
+                if(jsonObject.length()>0) {
+                    JSONArray resultJ=(JSONArray)jsonObject.get("result");
                     jsonObject = (JSONObject) resultJ.get(resultJ.length() - 1);
                     Integer last_resolved_update_id = (Integer) jsonObject.get("update_id");
                     if (last_update_id == 0) {
@@ -27,6 +27,12 @@ public class WatchDog implements Runnable {
 
                                 TeleBot.getTelegram().sendMessage(jsonObject.get("id").toString(), "Hello.Your%20chat_id-" + jsonObject.get("id").toString());
                                 break;
+                            }
+                            case("version"):{
+                                jsonObject = (JSONObject) jsonObject.get("chat");
+                                TeleBot.getTelegram().sendMessage(jsonObject.get("id").toString(), "TeleBot v0.01\nWaiting for commands");
+                                break;
+
                             }
                         }
                         last_update_id = last_resolved_update_id;
