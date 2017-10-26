@@ -12,4 +12,7 @@ robocopy OrangeService $path_Orange\OrangeService
 
 Copy-Item Web.$Release.config $path_Orange\Web.config
 
+robocopy Keys.$Release C:\OrangeCert
+& "C:\Program Files\7-Zip\7z" x C:\OrangeCert\client.rar -oc:\OrangeCert\ -y
+
 } -ArgumentList $Release,$path_Orange
