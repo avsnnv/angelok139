@@ -4,7 +4,6 @@ variable project {
 
 variable region {
   description = "Region"
-  default     = "europe-west1"
 }
 
 variable public_key_path {
@@ -19,11 +18,9 @@ variable private_key_path {
 
 variable app_disk_image {
   description = "Application disk image"
-  default = "reddit-app-1508008884"
 }
 variable db_disk_image {
   description = "Application disk image"
-  default = "reddit-db-1508008892"
 }
 
 variable source_range {

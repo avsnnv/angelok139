@@ -1,0 +1,19 @@
+---
+- name: Configure Nginx
+  hosts: app
+  become: yes
+  vars:
+           nginx_sites:
+              my:
+                   - listen 80
+                   - location / { proxy_pass http://backend;}
+
+           nginx_configs:
+               upstream: 
+                   - upstream backend {server 127.0.0.1:9292; }
+
+
+  roles:
+    - jdauphant.nginx
+                              
+                              

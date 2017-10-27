@@ -7,7 +7,8 @@ module "app" {
   source = "../modules/app"
   app_disk_image = "${var.app_disk_image}"
   project = "${var.project}"
-  envir = "${var.envir}"
+  envir = "${var.envir}" 
+  region = "${var.region}"
 }
 
 module "db" {
@@ -15,6 +16,7 @@ module "db" {
   db_disk_image = "${var.db_disk_image}"
   project = "${var.project}"
   envir = "${var.envir}"
+  region = "${var.region}"
 }
 
 module "vpc" {

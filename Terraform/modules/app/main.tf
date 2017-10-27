@@ -42,13 +42,14 @@ resource "google_compute_address" "appip" {
   name = "appip-${var.envir}"
 }
 
-resource "google_compute_firewall" "firewall_puma" {
-  name    = "allow-puma-default-${var.envir}"
+
+resource "google_compute_firewall" "firewall_puma80" {
+  name    = "allow-puma-80-${var.envir}"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["9292"]
+    ports    = ["80"]
   }
 
   source_ranges = ["0.0.0.0/0"]
