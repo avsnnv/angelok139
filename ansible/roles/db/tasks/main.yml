@@ -1,5 +1,9 @@
 ---
 # tasks file for db
+  - name: Show info about enviropments
+    debug:
+      msg: "This host is in {{ env }} enviropment!"
+
   - name: Change mongo config file
     template:
            src: mongod.conf.j2
