@@ -1,0 +1,36 @@
+---
+- name: Configure App
+  hosts: app
+  vars:
+
+  tasks:
+    - name: Install IIS part 1
+      win_feature:
+              name: Web-Server,Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider
+              state: present
+              include_sub_features: True
+    - name: Install IIS part 2
+      win_feature:
+              name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45
+              state: present
+              include_sub_features: True
+
+    - name: Remove SMB v1
+      win_feature:
+              name: FS-SMB1
+              state: absent
+
+    - name: Allow Firewall for Apps
+      win_firewall_rule:
+              name: Site
+              localport: 5010,5020,5030,5040
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+    - name: Enable windows update service
+      win_service:
+              name: wuauserv
+              state: started
+              start_mode: auto
