@@ -16,3 +16,4 @@ Copy-Item Most.Core\Most.Core.API.Services\NLog.$Release.config Most.Core\Most.C
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.Statistics.Web
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.OrangeDataService
 copy $Filename c:\AutoDeploy\ftp_root
+echo $filename >CoreApi.Last.$Release
