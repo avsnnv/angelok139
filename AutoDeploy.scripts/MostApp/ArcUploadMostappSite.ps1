@@ -16,4 +16,5 @@ Copy-Item Most.Core\Most.Core.API.Services\NLog.$Release.config Most.Core\Most.C
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.Statistics.Web
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.OrangeDataService
 copy $Filename c:\AutoDeploy\ftp_root
-cmd.exe /c mklink Most.Core.Last.$Release c:\AutoDeploy\ftp_root\$Filename
+Remove-Item -force c:\AutoDeploy\ftp_root\Most.Core.Last.$Release
+cmd.exe /c mklink c:\AutoDeploy\ftp_root\Most.Core.Last.$Release c:\AutoDeploy\ftp_root\$Filename
