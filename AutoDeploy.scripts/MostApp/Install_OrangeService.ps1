@@ -14,6 +14,6 @@ Copy-Item Web.$Release.config $path_Orange\Web.config
 robocopy Keys.$Release C:\OrangeCert
 & "C:\Program Files\7-Zip\7z" x C:\OrangeCert\7708279602.rar -oc:\OrangeCert\ -y
 $password=ConvertTo-SecureString -String 1234 -AsPlainText -force
-Import-PfxCertificate -Password $password -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\OrangeCert\clientA.pfx
+Import-PfxCertificate -Password $password -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\OrangeCert\7708279602.pfx
 
 } -ArgumentList $Release,$path_Orange
