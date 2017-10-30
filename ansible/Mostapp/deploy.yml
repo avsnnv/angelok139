@@ -35,4 +35,11 @@
               state: started
               start_mode: auto
 
-    
+    - name: Install 7-zip
+      win_chocolatey:
+              name: '{{ item }}'
+              state: present
+      with_items:
+      - 7zip
+      - git
+      - jdk8
