@@ -34,3 +34,5 @@
               name: wuauserv
               state: started
               start_mode: auto
+
+    
