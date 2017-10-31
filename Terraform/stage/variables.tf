@@ -19,11 +19,11 @@ variable private_key_path {
 
 variable app_disk_image {
   description = "Application disk image"
-  default = "reddit-app-1508754601"
+  default = "ubuntu-1604-xenial-v20171026a"
 }
 variable db_disk_image {
   description = "Application disk image"
-  default = "reddit-db-1508754809"
+  default = "centos-7-v20171025"
 }
 
 variable source_range {
