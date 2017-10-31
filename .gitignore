@@ -28,3 +28,5 @@ hs_err_pid*
 .terraform/
 workspace.xml
 *.retry
+.vagrant/
+*.logs
