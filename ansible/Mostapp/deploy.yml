@@ -45,4 +45,34 @@
       - jdk8
 
     - name: Clone deploy repository
-      win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\temp\MostappDeploy
+      win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\MostappDeploy
+      args:
+        creates: c:\MostappDeploy\
+
+    - name: Update repository
+      win_command: git pull
+      args:
+        chdir: c:\MostappDeploy
+    
+    - name: Upload ncftp
+      win_copy:
+        src: files/NcFTP.msi
+        dest: c:\temp\
+
+    - name: Install ncftp
+      win_package: 
+        path: c:\temp\NcFTP.msi
+        state: present
+
+    - name: Download and Extract Api
+      win_shell: 
+        command: powershell -File c:\MostappDeploy\AutoDeploy.scripts\Mostapp\DownloadExtract.ps1 localhost Most.Core.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        elevated: yes
+
+      register: result
+
+    - name: ded
+      debug:
+        msg: "{{ result }}"
+
+
