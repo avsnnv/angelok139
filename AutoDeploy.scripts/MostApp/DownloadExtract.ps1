@@ -2,5 +2,5 @@
 
 echo "Begin Download and Extract $Filename on $server"
 
-Invoke-Command -ComputerName $server -FilePath LocalDownloadExtract.ps1 -ArgumentList $Filename,$ftpUser,$ftpPass
+Invoke-Command -ComputerName $server -FilePath Scripts/LocalDownloadExtract.ps1 -ArgumentList $Filename,$ftpUser,$ftpPass
 
