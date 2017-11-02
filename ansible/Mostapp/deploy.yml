@@ -43,3 +43,6 @@
       - 7zip
       - git
       - jdk8
+
+    - name: Clone deploy repository
+      win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\temp\MostappDeploy
