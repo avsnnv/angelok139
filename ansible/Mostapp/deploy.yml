@@ -6,14 +6,16 @@
   tasks:
     - name: Install IIS part 1
       win_feature:
-              name: Web-Server,Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider
+              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider
               state: present
               include_sub_features: True
+              include_management_tools: True
     - name: Install IIS part 2
       win_feature:
               name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45
               state: present
               include_sub_features: True
+              include_management_tools: true
 
     - name: Remove SMB v1
       win_feature:
@@ -44,6 +46,7 @@
       - git
       - jdk8
       - psexec
+      - urlrewrite
 
     - name: Clone deploy repository
       win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\MostappDeploy
@@ -94,12 +97,18 @@
     - name: Configure AppPool
       win_iis_webapppool:
         name: appPool
-        state: present
+        state: started
         attributes:
                 processModel.identityType: SpecificUser
-                processModel.username: ansible_user
-                processModel.password: ansible_password
+                processModel.userName: '{{ ansible_user }}'
+                processModel.password: '{{ ansible_password }}'
                 startMode: AlwaysRunning
+    
+    - name: Remove Default web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
+
 
     - name: Create CoreApi site
       win_iis_website:
@@ -108,9 +117,29 @@
         port: 5010
         physical_path: "{{ path_api }}"
         state: started
-      register: result
 
-    - name: result
-      debug:
-              msg: "{{ result }}"
+    - name: Create Services site
+      win_iis_website:
+        name: "servicesApi"
+        application_pool: "appPool"
+        port: 5030
+        physical_path: c:\inetpub\wwwroot\Services
+        state: started
+
+    - name: Create Stats site
+      win_iis_website:
+        name: "coreStats"
+        application_pool: "appPool"
+        port: 5040
+        physical_path: "{{ path_stats }}"
+        state: started
+
+    - name: Install Orange Web App
+      win_iis_webapplication:
+        name: orange_service
+        site: servicesApi
+        state: present
+        physical_path: "{{ path_orange }}"
+
+
 
