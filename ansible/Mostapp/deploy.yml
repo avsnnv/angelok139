@@ -43,6 +43,7 @@
       - 7zip
       - git
       - jdk8
+      - psexec
 
     - name: Clone deploy repository
       win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\MostappDeploy
@@ -64,15 +65,52 @@
         path: c:\temp\NcFTP.msi
         state: present
 
-    - name: Download and Extract Api
-      win_shell: 
-        command: powershell -File c:\MostappDeploy\AutoDeploy.scripts\Mostapp\DownloadExtract.ps1 localhost Most.Core.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
-        elevated: yes
+    - name: Download, Extract Api
+      win_psexec: 
+        command: powershell -File LocalDownloadExtract.ps1 Most.Core.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
 
+    - name: Install API
+      win_psexec:
+        command: powershell -File LocalInstall_Api.ps1 {{ envirop }} {{ path_api }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+
+    - name: Install Services
+      win_psexec:
+        command: powershell -File LocalInstall_Services.ps1 {{ envirop }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install Stats
+      win_psexec:
+        command: powershell -File LocalInstall_Stats.ps1 {{ envirop }} {{ path_stats }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install Orange
+      win_psexec:
+        command: powershell -File LocalInstall_OrangeService.ps1 {{ envirop }} {{ path_orange }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Configure AppPool
+      win_iis_webapppool:
+        name: appPool
+        state: present
+        attributes:
+                processModel.identityType: SpecificUser
+                processModel.username: ansible_user
+                processModel.password: ansible_password
+                startMode: AlwaysRunning
+
+    - name: Create CoreApi site
+      win_iis_website:
+        name: "coreApi"
+        application_pool: "appPool"
+        port: 5010
+        physical_path: "{{ path_api }}"
+        state: started
       register: result
 
-    - name: ded
+    - name: result
       debug:
-        msg: "{{ result }}"
-
+              msg: "{{ result }}"
 
