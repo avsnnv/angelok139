@@ -94,6 +94,16 @@
         command: powershell -File LocalInstall_OrangeService.ps1 {{ envirop }} {{ path_orange }}
         chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
 
+    - name: Download, Extract SirenaWCF
+      win_psexec:
+        command: powershell -File LocalDownloadExtract.ps1 SirenaWCF.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install SirenaWCF
+      win_psexec:
+        command: powershell -File LocalInstall_SirenaWCF.ps1 {{ envirop }} {{ path_sirena }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
     - name: Configure AppPool
       win_iis_webapppool:
         name: appPool
