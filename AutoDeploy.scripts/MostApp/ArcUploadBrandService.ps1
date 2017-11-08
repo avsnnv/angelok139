@@ -1,4 +1,4 @@
-﻿param([String]$Filename,[String]$Release)
+﻿param($Filename,[String]$Release)
 
 echo "Prepare and Archive Distributive BrandService for $Release enviropment to $Filename"
 
