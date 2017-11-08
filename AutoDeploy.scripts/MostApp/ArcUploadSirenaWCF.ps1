@@ -7,4 +7,4 @@ Copy-Item SirenaTravelProxyGateWcf\App.$Release.config SirenaTravelProxyGateWcf\
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename SirenaTravelProxyGateWcf
 copy $Filename c:\AutoDeploy\ftp_root
-cmd.exe /c mklink c:\AutoDeploy\ftp_root\SirenaWCF.Last.$Filename c:\AutoDeploy\ftp_root\$Filename
+cmd.exe /c mklink c:\AutoDeploy\ftp_root\SirenaWCF.Last.$Release c:\AutoDeploy\ftp_root\$Filename
