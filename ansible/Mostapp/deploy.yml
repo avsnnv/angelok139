@@ -160,6 +160,8 @@
         name: orange_service
         site: servicesApi
         state: present
+        application_pool: "appPool"
+
         physical_path: "{{ path_orange }}"
 
     - name: Install SirenaWCF Web App
@@ -167,11 +169,17 @@
         name: SirenaWCF
         site: servicesApi
         state: present
+        application_pool: "appPool"
         physical_path: "{{ path_sirena }}"
 
     - name: Install Branding Web App
       win_iis_webapplication:
         name: BrandingWCF
         site: servicesApi
+        application_pool: "appPool"
         state: present
         physical_path: "{{ path_BrandService }}"
+
+    - name: Restart-Computer
+      win_shell: Restart-Computer 
+
