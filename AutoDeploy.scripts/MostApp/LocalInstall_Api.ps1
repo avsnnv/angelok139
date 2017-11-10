@@ -8,6 +8,8 @@ java -cp .\DevOps\src devops.Patch --inputfile=..\Most.Core\Most.Core.API\Web.$R
 
 cd c:\temp\Most.Core\Most.Core.API
 
+New-Item $path_api -ItemType Directory
+
 remove-Item -Recurse $path_api\App
 Move-Item App $path_api\
 
