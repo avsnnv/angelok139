@@ -6,7 +6,7 @@
   tasks:
     - name: Install IIS part 1
       win_feature:
-              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider
+              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider,Web-Static-Content
               state: present
               include_sub_features: True
               include_management_tools: True
@@ -163,6 +163,11 @@
         application_pool: "appPool"
 
         physical_path: "{{ path_orange }}"
+    - name: Upload SirenaWCF
+      win_copy:
+        src: files/SirenaTravelProxyGateWcf.SirenaGateService.svc
+        dest: "{{ path_sirena }}\\"
+
 
     - name: Install SirenaWCF Web App
       win_iis_webapplication:
@@ -171,6 +176,7 @@
         state: present
         application_pool: "appPool"
         physical_path: "{{ path_sirena }}"
+
 
     - name: Install Branding Web App
       win_iis_webapplication:
