@@ -1,0 +1,191 @@
+---
+- name: Configure App
+  hosts: app
+  vars:
+
+  tasks:
+    - name: Install IIS part 1
+      win_feature:
+              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider,Web-Static-Content
+              state: present
+              include_sub_features: True
+              include_management_tools: True
+    - name: Install IIS part 2
+      win_feature:
+              name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45
+              state: present
+              include_sub_features: True
+              include_management_tools: true
+
+    - name: Remove SMB v1
+      win_feature:
+              name: FS-SMB1
+              state: absent
+
+    - name: Allow Firewall for Apps
+      win_firewall_rule:
+              name: Site
+              localport: 5010,5020,5030,5040
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+    - name: Enable windows update service
+      win_service:
+              name: wuauserv
+              state: started
+              start_mode: auto
+
+    - name: Install 7-zip
+      win_chocolatey:
+              name: '{{ item }}'
+              state: present
+      with_items:
+      - 7zip
+      - git
+      - jdk8
+      - psexec
+      - urlrewrite
+
+    - name: Clone deploy repository
+      win_command: git clone -b MostappDeploy-{{ envirop }} https://github.com/angelok139/angelok139 c:\MostappDeploy
+      args:
+        creates: c:\MostappDeploy\
+
+    - name: Update repository
+      win_command: git pull
+      args:
+        chdir: c:\MostappDeploy
+    
+    - name: Upload ncftp
+      win_copy:
+        src: files/NcFTP.msi
+        dest: c:\temp\
+
+    - name: Install ncftp
+      win_package: 
+        path: c:\temp\NcFTP.msi
+        state: present
+
+    - name: Download, Extract Api
+      win_psexec: 
+        command: powershell -File LocalDownloadExtract.ps1 Most.Core.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install API
+      win_psexec:
+        command: powershell -File LocalInstall_Api.ps1 {{ envirop }} {{ path_api }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+
+    - name: Install Services
+      win_psexec:
+        command: powershell -File LocalInstall_Services.ps1 {{ envirop }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install Stats
+      win_psexec:
+        command: powershell -File LocalInstall_Stats.ps1 {{ envirop }} {{ path_stats }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install Orange
+      win_psexec:
+        command: powershell -File LocalInstall_OrangeService.ps1 {{ envirop }} {{ path_orange }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Download, Extract SirenaWCF
+      win_psexec:
+        command: powershell -File LocalDownloadExtract.ps1 SirenaWCF.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+
+    - name: Install SirenaWCF
+      win_psexec:
+        command: powershell -File LocalInstall_SirenaWCF.ps1 {{ envirop }} {{ path_sirena }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Download, Extract BrandingService
+      win_psexec:
+        command: powershell -File LocalDownloadExtract.ps1 BrandService.Last.{{ envirop }} {{ ftp_user }} {{ ftp_pass }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Install BrandingService
+      win_psexec:
+        command: powershell -File LocalInstall_BrandService.ps1 {{ envirop }} {{ path_BrandService }}
+        chdir: C:\MostappDeploy\AutoDeploy.scripts\Mostapp
+
+    - name: Configure AppPool
+      win_iis_webapppool:
+        name: appPool
+        state: started
+        attributes:
+                processModel.identityType: SpecificUser
+                processModel.userName: '{{ ansible_user }}'
+                processModel.password: '{{ ansible_password }}'
+                startMode: AlwaysRunning
+    
+    - name: Remove Default web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
+
+
+    - name: Create CoreApi site
+      win_iis_website:
+        name: "coreApi"
+        application_pool: "appPool"
+        port: 5010
+        physical_path: "{{ path_api }}"
+        state: started
+
+    - name: Create Services site
+      win_iis_website:
+        name: "servicesApi"
+        application_pool: "appPool"
+        port: 5030
+        physical_path: c:\inetpub\wwwroot\Services
+        state: started
+
+    - name: Create Stats site
+      win_iis_website:
+        name: "coreStats"
+        application_pool: "appPool"
+        port: 5040
+        physical_path: "{{ path_stats }}"
+        state: started
+
+    - name: Install Orange Web App
+      win_iis_webapplication:
+        name: orange_service
+        site: servicesApi
+        state: present
+        application_pool: "appPool"
+
+        physical_path: "{{ path_orange }}"
+    - name: Upload SirenaWCF
+      win_copy:
+        src: files/SirenaTravelProxyGateWcf.SirenaGateService.svc
+        dest: "{{ path_sirena }}\\"
+
+
+    - name: Install SirenaWCF Web App
+      win_iis_webapplication:
+        name: SirenaWCF
+        site: servicesApi
+        state: present
+        application_pool: "appPool"
+        physical_path: "{{ path_sirena }}"
+
+
+    - name: Install Branding Web App
+      win_iis_webapplication:
+        name: BrandingWCF
+        site: servicesApi
+        application_pool: "appPool"
+        state: present
+        physical_path: "{{ path_BrandService }}"
+
+    - name: Restart-Computer
+      win_shell: Restart-Computer 
+
