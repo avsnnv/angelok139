@@ -1,0 +1,16 @@
+---
+# tasks file for CRMApi
+
+    - name: Install 7-zip
+      win_chocolatey:
+              name: '{{ item }}'
+              state: present
+              proxy_url: "http://proxy.sirena-travel.ru:3128"
+      with_items:
+      - 7zip
+    
+    - name: Copy Install script
+      win_copy:
+              src: files/InstallScript.ps1
+              dest: c:\InstallScript.ps1
+
