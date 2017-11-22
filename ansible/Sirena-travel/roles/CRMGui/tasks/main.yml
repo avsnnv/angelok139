@@ -43,7 +43,6 @@
     - name: Create GUI site
       win_iis_website:
         name: "GUIDev"
-        application_pool: "appPool"
         port: 8080
         physical_path: "c:\\projects\\Crm.Gui.Dev"
         state: started
