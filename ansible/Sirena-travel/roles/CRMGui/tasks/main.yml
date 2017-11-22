@@ -23,13 +23,14 @@
               state: present
               include_sub_features: True
               include_management_tools: True
+      tags:   install_iis
     - name: Install IIS part 2
       win_feature:
               name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45
               state: present
               include_sub_features: True
               include_management_tools: true
-
+      tags:   install_iis
     - name: Allow Firewall for Apps
       win_firewall_rule:
               name: Site
