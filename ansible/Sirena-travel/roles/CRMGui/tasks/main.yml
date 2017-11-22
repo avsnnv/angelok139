@@ -33,7 +33,7 @@
     - name: Allow Firewall for Apps
       win_firewall_rule:
               name: Site
-              localport: 80
+              localport: 8080
               action: allow
               direction: in
               protocol: tcp
