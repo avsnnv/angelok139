@@ -1,2 +1,19 @@
 ---
 # tasks file for RabbitMQQueue
+- name: Install RabbitMQ
+  yum:
+          name: rabbitmq-server
+          state: latest
+
+- name: Start RabbitMQ
+  systemd:
+          name: rabbitmq-server
+          enabled: yes
+          state: started
+- name: Enable ports in firewall
+  firewalld:
+          port: 5671-5672/tcp
+          state: enabled
+          permanent: true
+
+
