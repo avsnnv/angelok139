@@ -21,8 +21,8 @@
     - name: Change user for selfhost service
       win_service:
               name: Crm.SelfHost.Service
-              username: {{ ansible_user }}
-              password: {{ansible_password }}
+              username: "{{ ansible_user }}"
+              password: "{{ansible_password }}"
               
     - name: Restart Crm.SelfHost
       win_service:
