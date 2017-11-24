@@ -17,5 +17,5 @@
   hosts: CRMApi
   roles:
           - CRMApi
-
+          - CRMAuth
 
