@@ -1,7 +1,7 @@
 ---
 # tasks file for CRMApi
 
-    - name: Install 7-zip
+    - name: Install Applications
       win_chocolatey:
               name: '{{ item }}'
               state: present
@@ -17,4 +17,26 @@
 
     - name: Run Install Script
       win_shell: c:\InstallScript.ps1
+
+    - name: Change user for selfhost service
+      win_service:
+              name: Crm.SelfHost.Service
+              username: {{ ansible_user }}
+              password: {{ansible_password }}
+              
+    - name: Restart Crm.SelfHost
+      win_service:
+              name: Crm.SelfHost.Service
+              state: restarted
+
+
+    - name: Create firewall rule for SelfHost
+      win_firewall_rule:
+              name: SelfHost
+              localport: 9002
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
 
