@@ -21,14 +21,9 @@
     - name: Change user for selfhost service
       win_service:
               name: Crm.SelfHost.Service
-              username: "{{ ansible_user }}"
-              password: "{{ansible_password }}"
+              username: LocalSystem
+              password: ""
               
-    - name: Restart Crm.SelfHost
-      win_service:
-              name: Crm.SelfHost.Service
-              state: restarted
-
 
     - name: Create firewall rule for SelfHost
       win_firewall_rule:
