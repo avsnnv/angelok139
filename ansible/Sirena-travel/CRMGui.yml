@@ -1,6 +1,9 @@
 ---
 - name: Revert Initial State
   hosts: hyperv
+  vars:
+          ar_code: "TEST"
+          api_url: "10.1.8.155:8080/api"
   tasks:
   - debug:
       msg: "Revert CRMGui to Initial State"
