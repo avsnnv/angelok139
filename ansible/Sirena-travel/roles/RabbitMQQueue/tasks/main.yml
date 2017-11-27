@@ -24,5 +24,22 @@
           port: 5671-5672/tcp
           state: enabled
           permanent: true
+- name: Create vhost
+  become: yes
+  rabbitmq_vhost:
+          name: /utpnr
+          state: present
+
+- name: Create user
+  become: yes
+  rabbitmq_user:
+          user: rmqtest
+          password: rmqpass
+          permissions:
+                  - vhost: /utpnr
+                    configure_priv: .*
+                    read_priv: .*
+                    write_priv: .*
+          state: present
 
 
