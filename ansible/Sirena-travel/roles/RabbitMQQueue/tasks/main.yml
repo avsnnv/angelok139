@@ -23,7 +23,7 @@
   firewalld:
           port: 5671-5672/tcp
           state: enabled
-          permanent: true
+
 - name: Create vhost
   become: yes
   rabbitmq_vhost:
@@ -55,6 +55,6 @@
           state: present
 - name: Create Queue
   become: yes
-  shell: rabbitmqctl set_permissions -p /utpnr utpublisher "rabbitmq_ut_import_test" ".*" "" && rabbitmqctl set_permissions -p /utpnr utconsumer "rabbitmq_ut_import_test" ".*" ""
+  shell: rabbitmqctl set_permissions -p /utpnr utpublisher "rabbitmq_ut_import_test" ".*" "" && rabbitmqctl set_permissions -p /utpnr utconsumer "rabbitmq_ut_import_test" "" ".*"
 
 
