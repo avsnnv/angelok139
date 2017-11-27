@@ -23,7 +23,7 @@
               name: Crm.SelfHost.Service
               username: LocalSystem
               password: ""
-              
+              state: started 
 
     - name: Create firewall rule for SelfHost
       win_firewall_rule:
