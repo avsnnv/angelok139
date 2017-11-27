@@ -30,16 +30,31 @@
           name: /utpnr
           state: present
 
-- name: Create user
+- name: Create user utpublisher
   become: yes
   rabbitmq_user:
-          user: rmqtest
-          password: rmqpass
+          user: utpublisher
+          password: testpass
           permissions:
                   - vhost: /utpnr
                     configure_priv: .*
                     read_priv: .*
                     write_priv: .*
           state: present
+
+- name: Create user consumer
+  become: yes
+  rabbitmq_user:
+          user: utconsumer
+          password: testpass
+          permissions:
+                  - vhost: /utpnr
+                    configure_priv: .*
+                    read_priv: .*
+                    write_priv: .*
+          state: present
+- name: Create Queue
+  become: yes
+  shell: rabbitmqctl set_permissions -p /utpnr utpublisher "rabbitmq_ut_import_test" ".*" "" && rabbitmqctl set_permissions -p /utpnr utconsumer "rabbitmq_ut_import_test" ".*" ""
 
 
