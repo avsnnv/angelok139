@@ -1,0 +1,37 @@
+---
+# tasks file for CRMApi
+
+    - name: Install Applications
+      win_chocolatey:
+              name: '{{ item }}'
+              state: present
+              proxy_url: "http://proxy.sirena-travel.ru:3128"
+      with_items:
+      - 7zip
+      - rabbitmq
+    
+    - name: Copy Install script
+      win_copy:
+              src: files/InstallScript.ps1
+              dest: c:\InstallScript.ps1
+
+    - name: Run Install Script
+      win_shell: c:\InstallScript.ps1
+
+    - name: Change user for selfhost service
+      win_service:
+              name: Crm.SelfHost.Service
+              username: LocalSystem
+              password: ""
+              state: started 
+
+    - name: Create firewall rule for SelfHost
+      win_firewall_rule:
+              name: SelfHost
+              localport: 9002
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+
