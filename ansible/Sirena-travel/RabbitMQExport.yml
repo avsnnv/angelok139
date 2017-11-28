@@ -1,0 +1,20 @@
+---
+- name: Revert Initial State
+  hosts: hyperv
+  tasks:
+  - debug:
+      msg: "Revert"
+
+  - win_shell: get-VM RabbitMQExport | Restore-VMSnapshot -Name InitialState -Confirm:$false
+
+  - win_shell: Get-VM RabbitMQExport | Start-VM
+ 
+  - win_shell: Start-Sleep -s 30
+
+
+
+- name: Install RabbitMQExport
+  hosts: RabbitMQExport
+  roles:
+        - RabbitMQExport
+
