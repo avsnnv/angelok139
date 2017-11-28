@@ -1,5 +1,5 @@
 mkdir c:\temp
-ncftpget -u teamcity -p Qq111111 192.168.0.1 c:\temp\ RMQWorkerExportUT.Last
+ncftpget -u teamcity -p Qq111111 192.168.0.1 c:\temp\ RMQWorkerExportUT.Last.7z
 & "C:\Program Files\7-Zip\7z" x c:\temp\RMQWorkerExportUT.Last.7z -oc:\temp -y
 
 mkdir c:\projects\RMQWorkerExportUT\
