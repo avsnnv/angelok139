@@ -20,6 +20,7 @@
           state: started
 
 - name: Enables the rabbitmq_management plugin
+  become: yes
   rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
