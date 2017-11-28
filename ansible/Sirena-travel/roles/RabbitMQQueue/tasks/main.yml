@@ -12,24 +12,30 @@
           src: templates/rabbitmq.config
           dest: /etc/rabbitmq/rabbitmq.config
 
-- name: Start RabbitMQ
-  become: yes
-  systemd:
-          name: rabbitmq-server
-          enabled: yes
-          state: started
-
 - name: Enables the rabbitmq_management plugin
   become: yes
   rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
 
-- name: Enable ports in firewall
+- name: Enable ports for RabbitMQ server in firewall
   become: yes
   firewalld:
-          port: 5671-5672/tcp,15672/tcp
+          port: 5671-5672/tcp
           state: enabled
+
+- name: Enable ports for RabbitMQ managment in firewall
+  become: yes
+  firewalld:
+          port: 15672/tcp
+          state: enabled
+
+- name: Start RabbitMQ
+  become: yes
+  systemd:
+          name: rabbitmq-server
+          enabled: yes
+          state: started
 
 - name: Create vhost
   become: yes
