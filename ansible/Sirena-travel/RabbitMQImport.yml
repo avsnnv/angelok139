@@ -1,0 +1,22 @@
+---
+- name: Revert Initial State
+  hosts: hyperv
+  tasks:
+  - debug:
+      msg: "Revert"
+
+  - win_shell: get-VM RabbitMQImport | Restore-VMSnapshot -Name InitialState -Confirm:$false
+
+  - win_shell: Get-VM RabbitMQImport | Start-VM
+ 
+  - win_shell: Start-Sleep -s 30
+
+
+
+- name: Install RabbitMQImport
+  hosts: RabbitMQImport
+  vars:
+          rmq_queue_host: 192.168.0.100
+  roles:
+        - RMQThreadManager
+
