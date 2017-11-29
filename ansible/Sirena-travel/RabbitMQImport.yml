@@ -19,4 +19,4 @@
           rmq_queue_host: 192.168.0.100
   roles:
         - RMQThreadManager
-
+        - LeoTestProducer
