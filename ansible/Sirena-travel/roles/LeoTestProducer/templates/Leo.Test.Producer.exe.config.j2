@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="RmqHost" value="{{ rmq_queue_host }}" />
+    <add key="RmqQueue" value="rabbitmq_ut_import_test" />
+    <add key="RmqUserName" value="guest"/>
+    <add key="RmqPassword" value="guest"/>
+    <add key="RmqPort" value="5672"/>
+    <add key="RmqVirtualHost" value="/"/>
+    <add key="RmqSslOn" value="false"/>
+    <add key="RmqTestMode" value="false"/>
+    <add key="ScheduleQueueName" value="ScheduleQueue"/>
+    <add key="StateQueueName" value="StateQueue"/>
+  </appSettings>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+    </startup>
+</configuration>
