@@ -1,0 +1,28 @@
+---
+
+    - name: Install Applications
+      win_chocolatey:
+              name: '{{ item }}'
+              state: present
+              proxy_url: "http://proxy.sirena-travel.ru:3128"
+      with_items:
+      - 7zip
+    
+    - name: Copy Install script
+      win_copy:
+              src: files/InstallScript.ps1
+              dest: c:\InstallScript.ps1
+
+    - name: Run Install Script
+      win_shell: c:\InstallScript.ps1
+
+    - name: Install LeoLoader Config
+      win_template:
+              src: Leo.Loader.exe.config.j2
+              dest: c:\projects\RMQWorkerExportUT\Leo.Loader.exe.config
+
+    - name: Restart Service
+      win_service:
+              name: CRM.Leo.Loader
+              state: restarted
+
