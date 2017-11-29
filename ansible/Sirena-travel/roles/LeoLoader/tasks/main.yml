@@ -19,7 +19,7 @@
     - name: Install LeoLoader Config
       win_template:
               src: Leo.Loader.exe.config.j2
-              dest: c:\projects\RMQWorkerExportUT\Leo.Loader.exe.config
+              dest: c:\projects\CRM.Leo.Loader\Leo.Loader.exe.config
 
     - name: Restart Service
       win_service:
