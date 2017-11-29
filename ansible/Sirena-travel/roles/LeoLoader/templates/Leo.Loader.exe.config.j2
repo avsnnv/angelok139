@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+  <appSettings>
+    <add key="RunTime" value="00:01" />
+    <!--загруженные файлы расписания-->
+    <add key="FlightScheduleLoaded" value="C:\Test\Logger\ScheduleInput" />
+    <!--ошибочные файлы расписания-->
+    <add key="FlightScheduleError" value="C:\Test\Logger\ScheduleError" />
+    <!--загруженные файлы состояния-->
+    <add key="FlightStateLoaded" value="C:\Test\Logger\StateInput" />
+    <!--ошибочные файлы состояния -->
+    <add key="FlightStateError" value="C:\Test\Logger\StateError" />
+    <add key="RmqHost" value="{{ rmq_queue_host }}" />
+    <add key="RmqQueue" value="rabbitmq_ut_import_test" />
+    <add key="RmqUserName" value="guest" />
+    <add key="RmqPassword" value="guest" />
+    <add key="RmqPort" value="5672" />
+    <add key="RmqVirtualHost" value="/" />
+    <add key="RmqSslOn" value="false" />
+    <add key="RmqTestMode" value="false" />
+    <add key="ScheduleQueueName" value="ScheduleQueue" />
+    <add key="StateQueueName" value="StateQueue" />
+  </appSettings>
+  <log4net>
+    <root>
+      <level value="ALL" />
+      <appender-ref ref="CrmRabbitMqAppenderConsole" />
+      <appender-ref ref="CrmRabbitMqAppenderFileError" />
+      <appender-ref ref="CrmRabbitMqAppenderFileDebug" />
+      <appender-ref ref="CrmRabbitMqAppenderFileInfo" />
+    </root>
+    <appender name="CrmRabbitMqAppenderConsole" type="log4net.Appender.ConsoleAppender">
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="[%date] [%-5level] [%thread] %logger : %message | at line: %line %newline" />
+      </layout>
+      <filter type="log4net.Filter.LevelRangeFilter">
+        <levelMin value="DEBUG" />
+        <levelMax value="FATAL" />
+      </filter>
+    </appender>
+    <appender name="CrmRabbitMqAppenderFileDebug" type="log4net.Appender.RollingFileAppender">
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
+      <file value="logs/crm.ut.rabbitmq.debug.log" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="35" />
+      <maximumFileSize value="10MB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="[%date] [%-5level] [%thread] %logger : %message | at line: %line %newline" />
+      </layout>
+    </appender>
+    <appender name="CrmRabbitMqAppenderFileInfo" type="log4net.Appender.RollingFileAppender">
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
+      <file value="logs/crm.ut.rabbitmq.info.log" />
+      <filter type="log4net.Filter.LevelRangeFilter">
+        <levelMin value="INFO" />
+        <levelMax value="FATAL" />
+      </filter>
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="35" />
+      <maximumFileSize value="10MB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="[%date] [%-5level] [%thread] %logger : %message | at line: %line %newline" />
+      </layout>
+    </appender>
+    <appender name="CrmRabbitMqAppenderFileError" type="log4net.Appender.RollingFileAppender">
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
+      <file value="logs/crm.ut.rabbitmq.error.log" />
+      <filter type="log4net.Filter.LevelRangeFilter">
+        <levelMin value="ERROR" />
+        <levelMax value="FATAL" />
+      </filter>
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="35" />
+      <maximumFileSize value="10MB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="[%date] [%-5level] [%thread] %logger : %message | at line: %line %newline" />
+      </layout>
+    </appender>
+  </log4net>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <connectionStrings>
+{% raw %}    <add name="Report24" connectionString="data source=10.1.8.176;initial catalog=fss;persist security info=True;user id=veprikovep;password={{*9%HR*8OtE@LH&amp;;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" /> {% endraw %}
+ </connectionStrings>
+</configuration>
