@@ -5,6 +5,6 @@ icacls c:\projects /grant:r --% "avih":(OI)(CI)M
 
 & "C:\Program Files\7-Zip\7z" x c:\temp\LeoWebRepo.{{ build }}.7z -oC:\temp -y
 new-item c:\projects\Leo.Ticket.SH -type Directory
-Copy-Item C:\temp\Build\Leo.Ticket.API.SH\Release\*.* c:\projects\Leo.Ticket.SH\
-c:\projects\Leo.Ticket.API.SH\Leo.Ticket.API.SH -install name Leo.Ticket.SH
+Copy-Item C:\temp\Build\Leo.Ticket.API.SH\Release\*.* c:\projects\Leo.Ticket.SH\ -Recurse
+c:\projects\Leo.Ticket.SH\Leo.Ticket.API.SH -install name Leo.Ticket.SH
 
