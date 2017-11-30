@@ -18,3 +18,9 @@
     - name: Run Install Script
       win_shell: c:\InstallScript.ps1
 
+    - name: Change user for selfhost service
+      win_service:
+              name: Crm.Auth.WebApi
+              username: LocalSystem
+              password: ""
+              state: started
