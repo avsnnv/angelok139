@@ -28,7 +28,7 @@
     - name: Create firewall rule for SelfHost
       win_firewall_rule:
               name: SelfHost
-              localport: 9002
+              localport: 9001-9002
               action: allow
               direction: in
               protocol: tcp
