@@ -1,0 +1,23 @@
+---
+- name: Revert Initial State
+  hosts: hyperv
+  tasks:
+  - debug:
+      msg: "Revert"
+
+  - win_shell: get-VM LeoTicketSH | Restore-VMSnapshot -Name InitialState -Confirm:$false
+
+  - win_shell: Get-VM LeoTicketSH | Start-VM
+ 
+  - win_shell: Start-Sleep -s 30
+
+
+
+- name: Install LeoTicketSH
+  hosts: LeoTicketSH
+  vars:
+          build: "79"
+
+  roles:
+          - LeoTicketSH
+          - CRMAuth
