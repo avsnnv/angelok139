@@ -18,8 +18,9 @@
   vars:
         ar_code: "TEST"
         api_url: "http://10.1.8.155:8080/api"
-
+        web_auth_url: "http://10.1.8.155:8080/web_auth"
+        GuAd_build: "11"
   roles:
           - CRMGui
-
+          - CRMGuiAdminTools
 
