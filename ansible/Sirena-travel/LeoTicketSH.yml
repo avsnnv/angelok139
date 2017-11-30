@@ -1,9 +1,8 @@
 ---
 - name: Revert Initial State
   hosts: hyperv
+  tags: revert
   tasks:
-  - debug:
-      msg: "Revert"
 
   - win_shell: get-VM LeoTicketSH | Restore-VMSnapshot -Name InitialState -Confirm:$false
 
@@ -15,6 +14,7 @@
 
 - name: Install LeoTicketSH
   hosts: LeoTicketSH
+  tags: install
   vars:
           build: "79"
 
