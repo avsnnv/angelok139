@@ -55,7 +55,7 @@
 
     - name: Add config to GUI
       win_template:
-              src: config.SADMIN.json.j2
+              src: config.SAdmin.json.j2
               dest: c:\projects\Crm.Gui.Dev\sadmin\assets\config.json
 
 
