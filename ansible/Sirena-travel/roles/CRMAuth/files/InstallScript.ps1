@@ -14,4 +14,3 @@ Start-Service Crm.Auth.Service
 mkdir c:\projects\Crm.Auth.WebAPI\
 Copy-Item C:\temp\Build\Crm.Auth.WebApi\Release\*.* c:\projects\Crm.Auth.WebApi\ -Force
     c:\projects\Crm.Auth.WebApi\Crm.Auth.WebApi -install name Crm.Auth.WebApi
-Start-Service Crm.Auth.WebApi
