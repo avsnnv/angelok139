@@ -51,7 +51,7 @@
     - name: Add config to GUI
       win_template:
               src: config.UT.json.j2
-              dest: c:\projects\Crm.Gui.Dev\admin\assets\config.json
+              dest: c:\projects\Crm.Gui.Dev\utadmin\assets\config.json
 
     - name: Add config to GUI
       win_template:
