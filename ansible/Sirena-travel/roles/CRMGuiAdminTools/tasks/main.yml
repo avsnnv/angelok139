@@ -10,8 +10,8 @@
       - 7zip
     
     - name: Copy Install script
-      win_copy:
-              src: files/InstallScript.ps1
+      win_template:
+              src: InstallScript.ps1.j2
               dest: c:\InstallScript.ps1
 
     - name: Run Install Script
