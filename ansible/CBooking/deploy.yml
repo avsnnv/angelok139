@@ -29,6 +29,16 @@
               state: present
               include_sub_features: True
               include_management_tools: true
+    - name: Create firewall rule for MySQL
+      win_firewall_rule:
+              name: SelfHost
+              localport: 3306
+              action: allow
+              remoteip: 194.84.22.2
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
 
 
   handlers:
