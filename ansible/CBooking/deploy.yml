@@ -1,0 +1,38 @@
+---
+# Preset:
+# MSSQL Server 2016
+#
+
+- name: Install software
+  hosts: all
+  tasks:
+    - name: Install MySQL
+      win_chocolatey:
+              name: mysql
+              state: present
+    - name: Copy configuration file
+      win_template:
+              src: my.ini.j2
+              dest: c:\\tools\\mysql\\current\\my.ini
+      notify:
+        - Restart MySQL service
+
+    - name: Install IIS part 1
+      win_feature:
+              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider,Web-Static-Content
+              state: present
+              include_sub_features: True
+              include_management_tools: True
+    - name: Install IIS part 2
+      win_feature:
+              name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45
+              state: present
+              include_sub_features: True
+              include_management_tools: true
+
+
+  handlers:
+    - name: Restart MySQL service
+      win_service:
+              name: mysql
+              state: restarted
