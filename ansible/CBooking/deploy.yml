@@ -39,6 +39,17 @@
       win_webpicmd:
               name: "PHP56"
 
+    - name: Upload ncftp
+      win_copy:
+        src: files/NcFTP.msi
+        dest: c:\temp\
+
+    - name: Install ncftp
+      win_package: 
+        path: c:\temp\NcFTP.msi
+        state: present
+
+
     - name: Create firewall rule for MySQL
       win_firewall_rule:
               name: SelfHost
