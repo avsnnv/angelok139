@@ -22,6 +22,11 @@
               name: webpicmd
               state: present
 
+    - name: Install 7-zip
+      win_chocolatey:
+              name: 7zip
+              state: present
+
     - name: Install IIS part 1
       win_feature:
               name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider,Web-Static-Content
