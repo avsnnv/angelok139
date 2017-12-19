@@ -40,6 +40,12 @@
               include_sub_features: True
               include_management_tools: true
 
+    - name: Remove SMB v1
+      win_feature:
+              name: FS-SMB1
+              state: absent
+
+
     - name: Install PHP
       win_webpicmd:
               name: "PHP56"
@@ -76,7 +82,42 @@
               protocol: tcp
               state: present
               enabled: yes
-              
+
+    - name: Remove Default web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
+
+    - name: Configure AppPool
+      win_iis_webapppool:
+        name: appPool
+        state: started
+        attributes:
+                processModel.identityType: SpecificUser
+                processModel.userName: '{{ ansible_user }}'
+                processModel.password: '{{ ansible_password }}'
+                startMode: AlwaysRunning
+
+
+    - name: Create CBooking WebSite
+      win_iis_website:
+        name: "CBooking Core"
+        port: 80
+        application_pool: "appPool"
+        physical_path: C:\inetpub\wwwroot\CbookingWebsite
+        state: started
+
+
+    - name: Create firewall rule for CBooking website
+      win_firewall_rule:
+              name: CBooking Site
+              localport: 80
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+          
 
   handlers:
     - name: Restart MySQL service
