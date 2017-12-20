@@ -55,11 +55,6 @@
               src: php.ini.j2
               dest: "C:\\Program Files (x86)\\PHP\\v5.6\\php.ini"
 
-    - name: Copy configuration file
-      win_template:
-              src: cbasicglobal.php.j2
-              dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\include\\cbasicglobal.php"
-
     - name: Upload ncftp
       win_copy:
         src: files/NcFTP.msi
@@ -93,6 +88,15 @@
               state: present
               enabled: yes
 
+    - name: Copy Install script
+      win_template:
+              src: files/InstallScript.ps1.j2
+              dest: c:\InstallScript.ps1
+
+    - name: Run Install Script
+      win_shell: c:\InstallScript.ps1
+
+
     - name: Remove Default web Site
       win_iis_website:
         name: "Default Web Site"
@@ -107,7 +111,6 @@
                 processModel.userName: '{{ ansible_user }}'
                 processModel.password: '{{ ansible_password }}'
                 startMode: AlwaysRunning
-
 
     - name: Create CBooking WebSite
       win_iis_website:
@@ -127,7 +130,12 @@
               protocol: tcp
               state: present
               enabled: yes
-          
+   
+    - name: Copy configuration file
+      win_template:
+              src: cbasicglobal.php.j2
+              dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\include\\cbasicglobal.php"
+     
 
   handlers:
     - name: Restart MySQL service

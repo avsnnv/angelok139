@@ -1,0 +1,8 @@
+Remove-Item -Recurse -Force c:\temp
+New-Item c:\temp -ItemType Directory
+
+ncftpget -u {{ ftp_user }} -p {{ ftp_pass }} {{ ftp_server }} c:\temp\ CBooking.Last.{{ envirop }}
+cd c:\temp\
+
+& "C:\Program Files\7-Zip\7z" x c:\temp\CBooking.Last.{{ envirop }} -oc:\temp\ -y
+
