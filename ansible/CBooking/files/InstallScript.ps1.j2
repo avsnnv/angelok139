@@ -6,3 +6,8 @@ cd c:\temp\
 
 & "C:\Program Files\7-Zip\7z" x c:\temp\CBooking.Last.{{ envirop }} -oc:\temp\ -y
 
+Stop-Service W3SVC
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
+Move-Item -Force C:\temp\CbookingWebsite C:\inetpub\wwwroot\
+
+Start-Service W3SVC
