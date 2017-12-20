@@ -120,7 +120,14 @@
         physical_path: C:\inetpub\wwwroot\CbookingWebsite
         state: started
 
-
+    - name: Create hdswebsite
+      win_iis_webapplication:
+        name: hdswebsite
+        site: "CBooking Core"
+        application_pool: "appPool"
+        state: present
+        physical_path: "C:\\inetpub\\wwwroot\\CbookingWebsite\\hdswebsite"
+        
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
               name: CBooking Site
