@@ -50,6 +50,16 @@
       win_webpicmd:
               name: "PHP56"
 
+    - name: Copy configuration file
+      win_template:
+              src: php.ini.j2
+              dest: "C:\\Program Files (x86)\\PHP\\v5.6\\php.ini"
+
+    - name: Copy configuration file
+      win_template:
+              src: cbasicglobal.php.j2
+              dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\include\\cbasicglobal.php"
+
     - name: Upload ncftp
       win_copy:
         src: files/NcFTP.msi
@@ -66,7 +76,7 @@
               name: MySQL
               localport: 3306
               action: allow
-              remoteip: 194.84.22.2
+              remoteip: "194.84.22.2,127.0.0.1"
               direction: in
               protocol: tcp
               state: present
@@ -74,7 +84,7 @@
 
     - name: Create firewall rule for WinRM
       win_firewall_rule:
-              name: MySQL
+              name: WinRM
               localport: 5985
               action: allow
               remoteip: 188.65.211.36
