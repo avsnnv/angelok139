@@ -7,5 +7,5 @@ Move-Item -Force Most.TaxiCore.Api\* $path_TaxiApi
 
 Remove-Item -force -Recurse $path_Services
 mkdir $path_Services
-Move-Item -force Most.TaxiCore.GettService\* $path_Services
+Move-Item -force Most.TaxiCore.GettService\* $path_Services\GettTaxiWCF
 
