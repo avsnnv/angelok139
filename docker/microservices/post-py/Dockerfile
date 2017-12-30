@@ -1,6 +1,6 @@
 FROM python:3.6.0-alpine
 
-RUN pip install flask pymongo
+RUN pip install flask pymongo prometheus_client
 
 WORKDIR /app
 ADD . /app
