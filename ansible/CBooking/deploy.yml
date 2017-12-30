@@ -1,0 +1,151 @@
+---
+# Preset:
+# MSSQL Server 2016
+#
+
+- name: Install software
+  hosts: all
+  tasks:
+    - name: Install MySQL
+      win_chocolatey:
+              name: mysql
+              state: present
+    - name: Copy configuration file
+      win_template:
+              src: my.ini.j2
+              dest: c:\\tools\\mysql\\current\\my.ini
+      notify:
+        - Restart MySQL service
+    
+    - name: Install WebPI
+      win_chocolatey:
+              name: webpicmd
+              state: present
+
+    - name: Install 7-zip
+      win_chocolatey:
+              name: 7zip
+              state: present
+
+    - name: Install IIS part 1
+      win_feature:
+              name: Web-Http-Redirect,Web-Custom-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Dyn-Compression,Web-IP-Security,Web-Url-Auth,Web-CertProvider,Web-Static-Content
+              state: present
+              include_sub_features: True
+              include_management_tools: True
+    - name: Install IIS part 2
+      win_feature:
+              name: Web-Basic-Auth,Web-ASP,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-Net-Ext,Web-Net-Ext45,Web-ISAPI-Filter,Web-Mgmt-Service,Server-Media-Foundation,NET-WCF-HTTP-Activation45,NET-WCF-TCP-Activation45,Web-CGI
+              state: present
+              include_sub_features: True
+              include_management_tools: true
+
+    - name: Remove SMB v1
+      win_feature:
+              name: FS-SMB1
+              state: absent
+
+
+    - name: Install PHP
+      win_webpicmd:
+              name: "PHP56"
+
+    - name: Copy configuration file
+      win_template:
+              src: php.ini.j2
+              dest: "C:\\Program Files (x86)\\PHP\\v5.6\\php.ini"
+
+    - name: Upload ncftp
+      win_copy:
+        src: files/NcFTP.msi
+        dest: c:\temp\
+
+    - name: Install ncftp
+      win_package: 
+        path: c:\temp\NcFTP.msi
+        state: present
+
+
+    - name: Create firewall rule for MySQL
+      win_firewall_rule:
+              name: MySQL
+              localport: 3306
+              action: allow
+              remoteip: "194.84.22.2,127.0.0.1"
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+
+    - name: Create firewall rule for WinRM
+      win_firewall_rule:
+              name: WinRM
+              localport: 5985
+              action: allow
+              remoteip: 188.65.211.36
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+
+    - name: Copy Install script
+      win_template:
+              src: files/InstallScript.ps1.j2
+              dest: c:\InstallScript.ps1
+
+    - name: Run Install Script
+      win_shell: c:\InstallScript.ps1
+
+
+    - name: Remove Default web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
+
+    - name: Configure AppPool
+      win_iis_webapppool:
+        name: appPool
+        state: started
+        attributes:
+                processModel.identityType: SpecificUser
+                processModel.userName: '{{ ansible_user }}'
+                processModel.password: '{{ ansible_password }}'
+                startMode: AlwaysRunning
+
+    - name: Create CBooking WebSite
+      win_iis_website:
+        name: "CBooking Core"
+        port: 80
+        application_pool: "appPool"
+        physical_path: C:\inetpub\wwwroot\CbookingWebsite
+        state: started
+
+    - name: Create hdswebsite
+      win_iis_webapplication:
+        name: hdswebsite
+        site: "CBooking Core"
+        application_pool: "appPool"
+        state: present
+        physical_path: "C:\\inetpub\\wwwroot\\CbookingWebsite\\hdswebsite"
+        
+    - name: Create firewall rule for CBooking website
+      win_firewall_rule:
+              name: CBooking Site
+              localport: 80
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+   
+    - name: Copy configuration file
+      win_template:
+              src: cbasicglobal.php.j2
+              dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\include\\cbasicglobal.php"
+     
+
+  handlers:
+    - name: Restart MySQL service
+      win_service:
+              name: mysql
+              state: restarted

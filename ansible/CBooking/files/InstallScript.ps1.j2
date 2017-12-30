@@ -1,0 +1,13 @@
+Remove-Item -Recurse -Force c:\temp
+New-Item c:\temp -ItemType Directory
+
+ncftpget -u {{ ftp_user }} -p {{ ftp_pass }} {{ ftp_server }} c:\temp\ CBooking.Last.{{ envirop }}
+cd c:\temp\
+
+& "C:\Program Files\7-Zip\7z" x c:\temp\CBooking.Last.{{ envirop }} -oc:\temp\ -y
+
+Stop-Service W3SVC
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
+Move-Item -Force C:\temp\CbookingWebsite C:\inetpub\wwwroot\
+Move-Item -Force C:\temp\hdswebsite c:\inetpub\wwwroot\CbookingWebsite
+Start-Service W3SVC

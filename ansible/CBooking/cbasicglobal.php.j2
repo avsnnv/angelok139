@@ -1,0 +1,89 @@
+<?php
+
+class basic_global
+{
+
+//атребуты класса
+public $weg_for_andere_pics='img/';// путь к папке с фоткам (все картинки в одной папке)
+protected $vlojenie='';
+protected $absolut_url='{{ absolute_url }}';
+protected $mysql_database='cbooking_reconstruction';//Имя базы данных
+protected $mysql_username='{{ mysql_username }}';//Имя пользователя базы данных
+protected $mysql_password='{{ mysql_password }}';//Пароль пользователя базы данных
+protected $mysql_host="{{mysql_host}}";//Сервер базы данных
+
+protected $extension_for_link = 'php';
+protected $ya_metrika = '<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter28875055 = new Ya.Metrika({id:28875055, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/28875055" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->';
+
+//боевой для физиков
+protected $URL_WSDL='http://cbooking.ru/hdswebsite/service.asmx?wsdl';
+protected $location_WSDL='http://cbooking.ru/hdswebsite/service.asmx';
+protected $ns_WSDL='http://cbooking.ru/';
+protected $URL_WSDL_Endpoint = 'http://cbooking.ru/hdswebsite/service.asmx';
+
+
+/*
+// тестовый для физиков
+protected $URL_WSDL='http://cbooking.ru:81/hdswebsite/service.asmx?wsdl';
+protected $location_WSDL='http://cbooking.ru:81/hdswebsite/service.asmx';
+protected $ns_WSDL='http://cbooking.ru/';
+protected $URL_WSDL_Endpoint = 'http://cbooking.ru:81/hdswebsite/service.asmx';
+*/
+
+
+/*
+//тестовый арм
+protected $URL_WSDL='http://cbooking.ru:81/hdscontent/service.asmx?wsdl';
+protected $location_WSDL='http://cbooking.ru:81/hdscontent/service.asmx';
+protected $ns_WSDL='http://cbooking.ru/';
+protected $URL_WSDL_Endpoint = 'http://cbooking.ru:81/hdscontent/service.asmx';
+*/
+
+
+/*
+//боевой арм
+protected $URL_WSDL='http://cbooking.ru/hdscontent/service.asmx?wsdl';
+protected $location_WSDL='http://cbooking.ru/hdscontent/service.asmx';
+protected $ns_WSDL='http://cbooking.ru/';
+protected $URL_WSDL_Endpoint = 'http://cbooking.ru/hdscontent/service.asmx';
+*/
+
+
+function Get_STR_HTTP()
+{
+    
+    /*
+  return
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || $_SERVER['SERVER_PORT'] == 443;
+    */
+    
+
+$pv_sslport=443; /* for it might be different, as also Gabriel Sosa stated */
+$pv_URIprotocol = isset($_SERVER["HTTPS"]) ? (($_SERVER["HTTPS"]==="on" || $_SERVER["HTTPS"]===1 || $_SERVER["SERVER_PORT"]===$pv_sslport) ? "https://" : "http://") :  (($_SERVER["SERVER_PORT"]===$pv_sslport) ? "https://" : "http://");
+
+
+return $pv_URIprotocol;
+
+}
+
+public function GetAbsolutURL()
+{
+    
+   return $this->Get_STR_HTTP().$this->absolut_url;
+}
+
+public function GetExtensionForLink()
+{
+   return $this->extension_for_link;
+}
+
+public function GetAbsolutURLPlusVlojenie() // Завершение соединения
+{
+   return $this->Get_STR_HTTP().$this->absolut_url.$this->vlojenie;
+}
+
+
+}
+	
+?>
