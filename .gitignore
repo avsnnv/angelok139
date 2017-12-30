@@ -32,4 +32,8 @@ workspace.xml
 *.logs
 .yamllint
 TeleBot/.idea/
+<<<<<<< HEAD
 .idea
+=======
+
+>>>>>>> Convert to maven
