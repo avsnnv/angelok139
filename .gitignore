@@ -31,3 +31,5 @@ workspace.xml
 .vagrant/
 *.logs
 .yamllint
+TeleBot/.idea/
+
