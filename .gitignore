@@ -32,4 +32,4 @@ workspace.xml
 *.logs
 .yamllint
 TeleBot/.idea/
-
+.idea
