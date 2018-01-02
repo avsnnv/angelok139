@@ -129,6 +129,18 @@
         physical_path: "C:\\inetpub\\Applications\\{{ item }}"
       with_items:
         - hdscontent
+        - buhdocs
+        - channelmanagerapi
+        - cmxmlapi
+        - download
+        - hdsbo
+        - hdscontent
+        - hdsgateway
+        - hdsorderfo
+        - hdsorderfo2
+        - hdssvc
+        - hdswebsite
+        - hotelgateway
 
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
