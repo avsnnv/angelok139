@@ -9,5 +9,16 @@ cd c:\temp\
 Stop-Service W3SVC
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
 Move-Item -Force C:\temp\CbookingWebsite C:\inetpub\wwwroot\
-Move-Item -Force C:\temp\hdswebsite c:\inetpub\wwwroot\CbookingWebsite
+Move-Item -Force C:\temp\hdswebsite c:\inetpub\Applications
+Move-Item -Force C:\temp\buhdocs c:\inetpub\Applications
+Move-Item -Force C:\temp\channelmanagerapi c:\inetpub\Applications
+Move-Item -Force C:\temp\cmxmlapi c:\inetpub\Applications
+Move-Item -Force C:\temp\download c:\inetpub\Applications
+Move-Item -Force C:\temp\hdsbo c:\inetpub\Applications
+Move-Item -Force C:\temp\hdscontent c:\inetpub\Applications
+Move-Item -Force C:\temp\hdsgateway c:\inetpub\Applications
+Move-Item -Force C:\temp\hdsorderfo c:\inetpub\Applications
+Move-Item -Force C:\temp\hdsorderfo2 c:\inetpub\Applications
+Move-Item -Force C:\temp\hdssvc c:\inetpub\Applications
+Move-Item -Force C:\temp\hotelgateway c:\inetpub\Applications
 Start-Service W3SVC

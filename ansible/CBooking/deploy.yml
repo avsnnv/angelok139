@@ -126,7 +126,7 @@
         site: "CBooking Core"
         application_pool: "appPool"
         state: present
-        physical_path: "C:\\inetpub\\wwwroot\\CbookingWebsite\\hdswebsite"
+        physical_path: "C:\\inetpub\\Applications\\hdswebsite"
         
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
