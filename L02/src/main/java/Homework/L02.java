@@ -8,18 +8,22 @@ public class L02 {
         System.out.println("PID: "+ ManagementFactory.getRuntimeMXBean().getName()+"\n");
 
         while(true){
-            int size=100_000_000;
+            int size=50_000_000;
+            Runtime runtime=Runtime.getRuntime();
             System.gc();
-            Thread.sleep(100);
-            long mem=ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax()-ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+            Thread.sleep(1000);
+
+            long mem=runtime.totalMemory()-runtime.freeMemory();
             System.out.println("Before: "+mem/1024+"Kb");
-            Object[] array=new Object[size];
-            long mem2=ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax()-ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+
+            int[] array=new int[size];
+            long mem2=runtime.totalMemory()-runtime.freeMemory();
             System.out.println("After array creating: "+mem2/1024+"Kb");
             for(int i=0;i<size;i++)
-                array[i]=new Object();
-            long mem3=ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax()-ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-            System.out.println("Size of one element: "+ ((mem2-mem3)/size));
+                array[i]=123;
+               //array[i]=Math.round(Math.random()*500);
+            long mem3=runtime.totalMemory()-runtime.freeMemory();
+            System.out.println("Size of one element: "+ ((mem2-mem)/size));
         }
     }
 }
