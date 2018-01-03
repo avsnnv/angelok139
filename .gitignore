@@ -31,3 +31,4 @@ workspace.xml
 .vagrant/
 *.logs
 .yamllint
+.idea

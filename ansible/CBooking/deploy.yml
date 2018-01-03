@@ -107,10 +107,18 @@
         name: appPool
         state: started
         attributes:
-                processModel.identityType: SpecificUser
-                processModel.userName: '{{ ansible_user }}'
-                processModel.password: '{{ ansible_password }}'
+                managedPipelineMode: Classic
                 startMode: AlwaysRunning
+                enable32BitAppOnWin64: True
+
+    - name: Configure Backoffice apppool
+      win_iis_webapppool:
+        name: BackOffice
+        state: started
+        attributes:
+                managedPipelineMode: Classic
+                startMode: AlwaysRunning
+                enable32BitAppOnWin64: False
 
     - name: Create CBooking WebSite
       win_iis_website:
@@ -118,6 +126,23 @@
         port: 80
         application_pool: "appPool"
         physical_path: C:\inetpub\wwwroot\CbookingWebsite
+        state: started
+
+    - name: Create ast.absolute_url
+      win_iis_website:
+        name: "ast.cbooking.ru"
+        port: 80
+        hostname: "ast.{{absolute_url}}"
+        application_pool: "DefaultAppPool"
+        physical_path: C:\inetpub\wwwroot\ast.cbooking.ru
+        state: started
+
+    - name: Create ast.absolute_url
+      win_iis_website:
+        name: "Backoffice"
+        port: 85
+        application_pool: "BackOffice"
+        physical_path: C:\inetpub\wwwroot\BackOffice
         state: started
 
     - name: Create Applications
@@ -151,6 +176,17 @@
               protocol: tcp
               state: present
               enabled: yes
+
+    - name: Create firewall rule for backoffice
+      win_firewall_rule:
+              name: Backoffice
+              localport: 85
+              action: allow
+              direction: in
+              protocol: tcp
+              state: present
+              enabled: yes
+
    
     - name: Copy configuration file
       win_template:

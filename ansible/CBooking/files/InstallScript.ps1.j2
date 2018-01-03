@@ -24,4 +24,10 @@ Move-Item -Force C:\temp\hdsorderfo c:\inetpub\Applications
 Move-Item -Force C:\temp\hdsorderfo2 c:\inetpub\Applications
 Move-Item -Force C:\temp\hdssvc c:\inetpub\Applications
 Move-Item -Force C:\temp\hotelgateway c:\inetpub\Applications
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\ast.cbooking.ru
+mkdir C:\inetpub\wwwroot\ast.cbooking.ru
+Move-Item -Force C:\temp\Style\ast.cbookng.ru\Publish\* C:\inetpub\wwwroot\ast.cbooking.ru
+mkdir C:\inetpub\wwwroot\BackOffice
+Move-Item -Force C:\temp\BackOffice\* C:\inetpub\wwwroot\BackOffice
+
 Start-Service W3SVC
