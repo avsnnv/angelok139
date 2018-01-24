@@ -198,6 +198,13 @@
               src: cbooking_web_config.j2
               dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\Web.config"
 
+    - name: Add user for Office Interop
+      win_user:
+              name: interopuser
+              password: "{{ InteropUserPassword }}"
+              password_never_expires: yes
+              state: present
+
   handlers:
     - name: Restart MySQL service
       win_service:
