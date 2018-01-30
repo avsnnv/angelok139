@@ -30,5 +30,8 @@ mkdir C:\inetpub\wwwroot\ast.cbooking.ru
 Move-Item -Force C:\temp\Style\ast.cbookng.ru\Publish\* C:\inetpub\wwwroot\ast.cbooking.ru
 mkdir C:\inetpub\wwwroot\BackOffice
 Move-Item -Force C:\temp\BackOffice\* C:\inetpub\wwwroot\BackOffice
-
+Stop-Service VBRunningService
+mkdir "C:\Program Files (x86)\Vitus Bering"
+Move-Item -Force C:\temp\VBRunningServiceSQL "C:\Program Files (x86)\Vitus Bering"
+Start-Service VBRunningService 
 Start-Service W3SVC
