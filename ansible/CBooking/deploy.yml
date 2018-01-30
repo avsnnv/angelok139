@@ -207,10 +207,10 @@
 
     - name: Install service for VBRunningService
       win_service:
-        name: VBRunningService
-        path: "C:\Program Files (x86)\Vitus Bering\VbRunningServiceSQL\bin\Release\VBRunningServiceSQL"
-	start_mode: auto
-	state: started
+              name: VBRunningService
+              path: "C:\\Program Files (x86)\\Vitus Bering\\VbRunningServiceSQL\\bin\\Release\\VBRunningServiceSQL.exe"
+              start_mode: auto
+              state: started
 
   handlers:
     - name: Restart MySQL service
