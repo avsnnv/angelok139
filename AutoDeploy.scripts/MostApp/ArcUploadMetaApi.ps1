@@ -2,8 +2,8 @@
 
 echo "Prepare and Archive Distributive for $Release enviropment to $Filename"
 
-Remove-Item -force Most.Core.IntegrationCore\Most.Core.Meta.API
-Copy-Item Most.Core.IntegrationCore\Most.Core.Meta.API\Web.$Release.config Most.Core.IntegrationCore\Most.Core.Meta.API\.config
+Remove-Item -force Most.Core.IntegrationCore\Most.Core.Meta.API\Web.config
+Copy-Item Most.Core.IntegrationCore\Most.Core.Meta.API\Web.$Release.config Most.Core.IntegrationCore\Most.Core.Meta.API\Web.config
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.IntegrationCore\Most.Core.Meta.API
 copy $Filename c:\AutoDeploy\ftp_root
