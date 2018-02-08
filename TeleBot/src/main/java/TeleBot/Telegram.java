@@ -1,10 +1,14 @@
 package TeleBot;
 
 import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.http.HttpHost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultRoutePlanner;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -16,6 +20,8 @@ import java.net.URLEncoder;
 
 class Telegram {
     private String token;
+    private String proxy_host;
+    private Integer proxy_port;
 
 
     Telegram(String configFile) {
@@ -24,6 +30,16 @@ class Telegram {
             config.read(new FileReader(configFile));
 
             token = config.getString("token");
+            try{
+                proxy_host = config.getString("proxy_host");
+                proxy_port = Integer.parseInt(config.getString("proxy_port"));
+                System.out.println("Using proxy:" +proxy_host+":"+proxy_port);
+
+            }
+            catch (Exception e){
+                System.out.println("Proxy not set");
+            }
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -64,6 +80,11 @@ class Telegram {
 
             HttpPost httpPost=new HttpPost("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + text);
             CloseableHttpClient httpClient= HttpClients.createDefault();
+            if(proxy_host!=null) {
+                HttpHost httpHost = new HttpHost(proxy_host, proxy_port);
+                RequestConfig config= RequestConfig.custom().setProxy(httpHost).build();
+                httpPost.setConfig(config);
+            }
             CloseableHttpResponse response=httpClient.execute(httpPost);
 
             httpClient.close();
