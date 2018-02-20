@@ -18,6 +18,14 @@
     - name: Run Install Script
       win_shell: c:\InstallScript.ps1
 
+    - name: Add project directory permissions
+      win_acl:
+              path: c:\projects
+              user: Users
+              type: allow
+              state: present
+              rights: modify
+
     - name: Change user for selfhost service
       win_service:
               name: Crm.SelfHost.Service
