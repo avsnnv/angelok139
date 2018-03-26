@@ -2,6 +2,6 @@
 
 cd c:\temp
 mkdir $path_ExpediaAPI
-robocopy Expedia.Core.Api $path_ExpediaAPI 
+robocopy Expedia.Core.Api $path_ExpediaAPI /E 
 
 
