@@ -1,9 +1,9 @@
-﻿param([String]$Filename,[String]$Release,[String]$Enviropment)
+﻿param([String]$Filename,[String]$Release,[String]$Enviropment,[String]$runCommand)
 
 echo "Prepare and Archive Distributive for $Release enviropment to $Filename"
 cd Expedia.Core.Node
 npm install -f
-npm run build:beta
+npm run build:$runCommand
 cd ..\Expedia.Core.Api
 Remove-Item -force Web.config
 Copy-Item Web.$Release.config Web.config
