@@ -8,7 +8,7 @@ cd ..\Expedia.Core.Api
 Remove-Item -force Web.config
 Copy-Item Web.$Release.config Web.config
 cd ..
-
+echo "Prepare service config"
 Remove-Item -force Expredia.Core.WinServices\bin\$Release\Expredia.Core.WinServices.exe.config
 Copy-Item Expredia.Core.WinServices\App.$Release.config Expredia.Core.WinServices\bin\$Release\Expredia.Core.WinServices.exe.config
 
