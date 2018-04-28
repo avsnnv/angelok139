@@ -6,7 +6,7 @@ Stop-Service ExpediaUpdateCartStatusService
 
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installUtil.exe /u c:\ExpediaServices\bin\Expredia.Core.WinServices.exe
 
-cd c:\temp\Expedia.Core.Services\bin\$Release
+cd c:\temp\Expredia.Core.WinServices\bin\$Release
 Remove-Item -force -recurse c:\ExpediaServices
 mkdir c:\ExpediaServices\bin
 robocopy . C:\ExpediaServices\bin /e
