@@ -2,5 +2,5 @@
 
 Remove-Item -force -recurse $path_WcfAPI
 mkdir $path_WcfAPI
-Move-Item c:\temp\Most.Core.API.WCF\* $path_WcfElma
+Move-Item C:\temp\Most.Core\Most.Core.API.WCF\* $path_WcfAPI
 
