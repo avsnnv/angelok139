@@ -8,13 +8,11 @@ Copy-Item Most.Core\Most.Core.API.Services\App.$Release.config Most.Core\Most.Co
 Remove-Item -force Most.Core\Most.Core.API.Services\bin\$Release\NLog.config
 Copy-Item Most.Core\Most.Core.API.Services\NLog.$Release.config Most.Core\Most.Core.API.Services\bin\$Release\NLog.config
 
-#javac DevOps\src\devops\*
-#java -cp .\DevOps\src devops.Patch --inputfile=.\Most.Core\Most.Core.API\Web.Debug.config --outputfile=.\Most.Core\Most.Core.API\Web.config --patchfile=.\Patches\testserver.patch 
-
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.API
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.API.Services
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.Statistics.Web
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.OrangeDataService
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core\Most.Core.API.WCF
 copy $Filename c:\AutoDeploy\ftp_root
 Remove-Item -force c:\AutoDeploy\ftp_root\Most.Core.Last.$Enviropment
 cmd.exe /c mklink c:\AutoDeploy\ftp_root\Most.Core.Last.$Enviropment c:\AutoDeploy\ftp_root\$Filename
