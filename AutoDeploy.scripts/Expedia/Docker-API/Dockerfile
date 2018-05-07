@@ -1,4 +1,5 @@
-FROM microsoft/iis
+FROM microsoft/aspnet
 RUN powershell wget -usebasicparsing ftp://$ftpUser:$ftpPassword@testserver1.mostapp.com/Expedia.Api.Last.Debug -outfile c:\Expedia.API.zip
-RUN powershell expand-archive -Path c:\\Expedia.API.zip -destinationPath c:\inetpub\wwwroot -force 
-
+RUN powershell expand-archive -Path c:\\Expedia.API.zip -destinationPath c:\ -force
+RUN powershell New-IISSite -Name "Site" -PhysicalPath C:\Expedia.Core.Api -BindingInformation "*:8000:"
+EXPOSE 8000
