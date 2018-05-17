@@ -2,4 +2,6 @@ FROM microsoft/aspnet
 
 RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;choco install -y --no-progress nodejs-lts git python2
 RUN npm -g install pm2
+COPY start.ps1 c:/
+ENTRYPOINT c:/start.ps1
 EXPOSE 4000 8000
