@@ -1,4 +1,4 @@
 cd c:\Expedia.Core.Node
-npm run start:pm2
+pm2 start ./processes.json --env docker.debug
 c:\ServiceMonitor.exe w3svc
 
