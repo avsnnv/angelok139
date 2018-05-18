@@ -4,4 +4,4 @@ RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.or
 RUN npm -g install pm2
 COPY start.ps1 c:/
 ENTRYPOINT c:/start.ps1
-EXPOSE 4000 8000
+EXPOSE 3000 8000
