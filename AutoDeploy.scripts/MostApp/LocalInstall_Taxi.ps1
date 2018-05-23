@@ -9,3 +9,6 @@ Remove-Item -force -Recurse $path_Services\GettTaxiWCF
 mkdir $path_Services\GettTaxiWCF
 Move-Item -force Most.TaxiCore.GettService\* $path_Services\GettTaxiWCF
 
+Remove-Item -force -Recurse $path_Services\YandexTaxiWCF
+mkdir $path_Services\YandexTaxiWCF
+Move-Item -force Most.TaxiCore.YandexService\* $path_Services\YandexTaxiWCF
