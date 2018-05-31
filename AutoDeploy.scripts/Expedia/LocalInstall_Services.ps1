@@ -1,5 +1,6 @@
 param([String]$Release)
-get-process Expedia.Core.WinServices|Stop-Process
+get-process Expedia.Core.WinServices|Stop-Process -f
+
 Stop-Service ExpediaDepositOrderService
 Stop-Service ExpediaCancelExpiringCartService
 Stop-Service ExpediaUpdateCartStatusService
