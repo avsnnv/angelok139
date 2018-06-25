@@ -9,13 +9,13 @@ Remove-Item -force Web.config
 Copy-Item Web.$Release.config Web.config
 cd ..
 echo "Prepare service config"
-Remove-Item -force Expredia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
-Copy-Item Expredia.Core.WinServices\App.$Release.config Expredia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
+Remove-Item -force Expedia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
+Copy-Item Expedia.Core.WinServices\App.$Release.config Expedia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
 
-Remove-Item -force Expredia.Core.WinServices\bin\$Release\NLog.config
-Copy-Item Expredia.Core.WinServices\NLog.$Release.config Expredia.Core.WinServices\bin\$Release\NLog.config
+Remove-Item -force Expedia.Core.WinServices\bin\$Release\NLog.config
+Copy-Item Expedia.Core.WinServices\NLog.$Release.config Expedia.Core.WinServices\bin\$Release\NLog.config
 
-& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Expredia.Core.WinServices
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Expedia.Core.WinServices
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Expedia.Core.Api
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Expedia.Core.Node
 Move-Item $Filename c:\AutoDeploy\ftp_root
