@@ -1,7 +1,6 @@
 ﻿param([String]$Release,[String]$path_ExpediaFront)
 
-cd c:\temp
+cd C:\temp\Expedia.Core.Node
 mkdir $path_ExpediaFront
-robocopy Expedia.Core.Node\* $path_ExpediaFront /E
-cd $path_ExpediaFront 
-
+Move-Item * $path_ExpediaFront 
+cd $path_ExpediaFront
