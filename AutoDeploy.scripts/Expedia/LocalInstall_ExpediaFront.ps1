@@ -2,6 +2,6 @@
 
 cd c:\temp
 mkdir $path_ExpediaFront
-robocopy . $path_ExpediaFront /E
+robocopy Expedia.Core.Node $path_ExpediaFront /E
 cd $path_ExpediaFront 
 
