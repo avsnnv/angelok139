@@ -1,4 +1,4 @@
-param([String]$Release,[String]$path_Orange)
+param([String]$Release,[String]$path_Orange,$path_services)
 
 cd c:\temp\Most.Core\Most.Core.OrangeDataService
 
@@ -12,4 +12,7 @@ robocopy Keys.$Release C:\OrangeCert
 $password=ConvertTo-SecureString -String 1234 -AsPlainText -force
 Import-PfxCertificate -Password $password -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\OrangeCert\7708279602.pfx
 
-
+cd ..
+mkdir $path_services\MostCoreVariablesService
+robocopy Most.Core.ElmaVariablesService $path_services\MostCoreVariablesService /e
+Copy-Item Most.Core.ElmaVariablesService\Web.$Release.config $path_services\MostCoreVariablesService\Web.config
