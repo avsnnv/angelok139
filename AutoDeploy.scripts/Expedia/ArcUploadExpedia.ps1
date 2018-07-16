@@ -5,6 +5,12 @@ cd Expedia.Core.Api
 Remove-Item -force Web.config
 Copy-Item Web.$Release.config Web.config
 cd ..
+
+cd Most.Core.OrangeDataService
+Remove-Item -force Web.config
+Copy-Item Web.$Release.config Web.config
+cd ..
+
 echo "Prepare service config"
 Remove-Item -force Expedia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
 Copy-Item Expedia.Core.WinServices\App.$Release.config Expedia.Core.WinServices\bin\$Release\Expedia.Core.WinServices.exe.config
