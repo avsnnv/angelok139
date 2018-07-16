@@ -1,10 +1,8 @@
 param([String]$Release,[String]$path_Orange,$path_services)
 
-cd c:\temp\Most.Core.OrangeDataService
-
-robocopy bin $path_Orange\bin
-robocopy OrangeData $path_Orange\OrangeData
-robocopy OrangeService $path_Orange\OrangeService
+cd c:\temp\
+mkdir $path_Orange
+robocopy Most.Core.OrangeDataService $path_Orange /E
 
 mkdir C:\OrangeCertExpedia
 robocopy Keys.$Release C:\OrangeCertExpedia
