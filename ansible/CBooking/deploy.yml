@@ -166,6 +166,7 @@
         - hdssvc
         - hdswebsite
         - hotelgateway
+        - hdsgatewaylite
 
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
