@@ -1,3 +1,0 @@
-prometheus_client==latest
-flask==latest
-pymongo==latest
