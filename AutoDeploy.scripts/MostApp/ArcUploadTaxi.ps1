@@ -8,11 +8,13 @@ Remove-Item -force Most.TaxiCore.GettService\Web.config
 Copy-Item Most.TaxiCore.GettService\Web.$Release.config Most.TaxiCore.GettService\Web.config
 Remove-Item -force Most.TaxiCore.YandexService\Web.config
 Copy-Item Most.TaxiCore.YandexService\Web.$Release.config Most.TaxiCore.YandexService\Web.config
+Remove-Item -force Most.TaxiCore.IwayServiceRemote\Web.config
+Copy-Item Most.TaxiCore.IwayServiceRemote\Web.$Release.config Most.TaxiCore.IwayServiceRemote\Web.config
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.TaxiCore.Api
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.TaxiCore.GettService
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.TaxiCore.YandexService
-
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.TaxiCore.IwayServiceRemote
 copy $Filename c:\AutoDeploy\ftp_root
 
 Remove-Item -force c:\AutoDeploy\ftp_root\Most.Core.Taxi.API.Last.$Release
