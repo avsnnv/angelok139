@@ -10,6 +10,7 @@ Move-Item hdsorderfo_old hdsorderfo
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdssvc
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdsbo
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdsgateway
+& "C:\Program Files\7-Zip\7z.exe" a $Filename hdsgatewaylite
 & "C:\Program Files\7-Zip\7z.exe" a $Filename buhdocs
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdsorderfo
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdsorderfo2

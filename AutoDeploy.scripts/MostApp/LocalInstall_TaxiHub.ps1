@@ -15,4 +15,4 @@ Move-Item -force Most.TaxiCore.YandexService\* $path_Services\YandexTaxiWCF
 
 Remove-Item -force -Recurse $path_Services\IwayTaxiWCF
 mkdir $path_Services\IwayTaxiWCF
-Move-Item -force Most.TaxiCore.IwayService\* $path_Services\IwayTaxiWCF
+Move-Item -force Most.TaxiCore.IwayServiceRemote\* $path_Services\IwayTaxiWCF
