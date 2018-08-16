@@ -14,9 +14,13 @@ Copy-Item Most.Core.CBooking.WinServices\NLog.$Release.config Most.Core.CBooking
 Remove-Item -force Most.Core.SettingsService\Web.config
 Copy-Item Most.Core.SettingsService\Web.$Release.config Most.Core.SettingsService\Web.config
 
+Remove-Item -force Most.Core.HotelBook.Gateway.WCF\Web.config
+Copy-Item Most.Core.HotelBook.Gateway.WCF\Web.$Release.config Most.Core.HotelBook.Gateway.WCF\Web.config
+
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.CBooking.API\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.CBooking.WinServices\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.SettingsService\
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.HotelBook.Gateway.WCF\
 
 copy $Filename c:\AutoDeploy\ftp_root
 
