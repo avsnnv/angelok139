@@ -10,4 +10,4 @@ Move-Item c:\temp\Most.Core.SettingsService\* $path_services\CbookingSettingsSer
 
 remove-item $path_services\HotelBookGateway.WCF
 mkdir $path_services\HotelBookGateway.WCF
-Move-Item c:\temp\HotelBookGateway.WCF\* $path_services\HotelBookGateway.WCF
+Move-Item c:\temp\Most.Core.HotelBook.Gateway.WCF\* $path_services\HotelBookGateway.WCF
