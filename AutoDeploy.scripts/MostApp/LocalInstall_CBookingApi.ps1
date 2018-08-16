@@ -8,3 +8,6 @@ remove-item $path_services\CbookingSettingsService -recurse -force
 mkdir $path_services\CbookingSettingsService
 Move-Item c:\temp\Most.Core.SettingsService\* $path_services\CbookingSettingsService\
 
+remove-item $path_services\HotelBookGateway.WCF
+mkdir $path_services\HotelBookGateway.WCF
+Move-Item c:\temp\HotelBookGateway.WCF\* $path_services\HotelBookGateway.WCF
