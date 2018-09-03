@@ -6,17 +6,6 @@
 - name: Install software
   hosts: all
   tasks:
-    - name: Install MySQL
-      win_chocolatey:
-              name: mysql
-              state: present
-    - name: Copy configuration file
-      win_template:
-              src: my.ini.j2
-              dest: c:\\tools\\mysql\\current\\my.ini
-      notify:
-        - Restart MySQL service
-    
     - name: Install WebPI
       win_chocolatey:
               name: webpicmd
@@ -218,8 +207,4 @@
               start_mode: auto
               state: started
 
-  handlers:
-    - name: Restart MySQL service
-      win_service:
-              name: mysql
-              state: restarted
+ 
