@@ -202,7 +202,7 @@
     - name: Copy configuration file for VBRunningService
       win_template:
               src: VBRunningServiceSQL.j2
-              dest: "C:\\Program Files (x86)\\Vitus Bering\\VbRunningServiceSQL\\bin\\Release\\VBRunningServiceSQL.exe"
+              dest: "C:\\Program Files (x86)\\Vitus Bering\\VbRunningServiceSQL\\bin\\Release\\VBRunningServiceSQL.exe.config"
 
     - name: Add user for Office Interop
       win_user:
