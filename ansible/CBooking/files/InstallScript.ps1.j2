@@ -35,5 +35,5 @@ Stop-Service VBRunningService
 mkdir "C:\Program Files (x86)\Vitus Bering"
 Move-Item -Force C:\temp\VBRunningServiceSQL "C:\Program Files (x86)\Vitus Bering"
 mkdir "C:\Program Files\DBExporter"
-Move-Item -Force C:\temp\DBExporterConsole\DBExporterConsole\bin\Release "C:\Program Files\DBExporter"
+Move-Item -Force C:\temp\DBExporterConsole\DBExporterConsole\bin\Release\* "C:\Program Files\DBExporter"
 Start-Service W3SVC
