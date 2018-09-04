@@ -206,8 +206,8 @@
     - name: Copy configuration file Web.config for DBExporter
       win_template:
               src: dbexporter.j2
-              dest: "C:\\Program Files\\DBExporter\DBExporterConsole.exe.config"
-              
+              dest: "C:\\Program Files\\DBExporter\\DBExporterConsole.exe.config"
+
     - name: Copy configuration file for VBRunningService
       win_template:
               src: VBRunningServiceSQL.j2
