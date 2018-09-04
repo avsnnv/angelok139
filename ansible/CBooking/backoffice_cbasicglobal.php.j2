@@ -1,0 +1,33 @@
+<?php
+
+class basic_global
+{
+
+//атребуты класса
+public $weg_for_andere_pics='img/';// путь к папке с фоткам (все картинки в одной папке)
+protected $vlojenie='';
+protected $absolut_url='{{ absolute_url }}';
+protected $mysql_database='cbooking_local_data';//Имя базы данных
+protected $mysql_username='{{ mysql_username }}';//Имя пользователя базы данных
+protected $mysql_password='{{ mysql_password }}';//Пароль пользователя базы данных
+protected $mysql_host="{{mysql_host}}";//Сервер базы данных
+
+protected $URL_WSDL='http://dce/hdscontent/service.asmx?wsdl';
+protected $location_WSDL='http://dce/hdscontent/service.asmx';
+protected $ns_WSDL='http://cbooking.ru/';
+protected $URL_WSDL_Endpoint = 'http://dce/hdscontent/service.asmx';
+
+public function GetAbsolutURL() // Завершение соединения
+{
+   return $this->absolut_url;
+}
+
+public function GetAbsolutURLPlusVlojenie() // Завершение соединения
+{
+   return $this->absolut_url.$this->vlojenie;
+}
+
+
+}
+	
+?>

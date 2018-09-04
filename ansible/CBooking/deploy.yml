@@ -182,7 +182,12 @@
       win_template:
               src: cbasicglobal.php.j2
               dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\include\\cbasicglobal.php"
-     
+    
+    - name: Copy configuration file Backofficecbasicglobal.php
+      win_template:
+              src: backoffice_cbasicglobal.php.j2
+              dest: "C:\\inetpub\\wwwroot\\BackOffice\\include\\cbasicglobal.php"
+        
     - name: Copy configuration file Web.config
       win_template:
               src: cbooking_web_config.j2
