@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!-- 
+    Note: As an alternative to hand editing this file you can use the 
+    web admin tool to configure settings for your application. Use
+    the Website->Asp.Net Configuration option in Visual Studio.
+    A full list of settings and comments can be found in 
+    machine.config.comments usually located in 
+    \Windows\Microsoft.Net\Framework\v2.x\Config 
+-->
+<configuration>
+  <system.net>
+    <defaultProxy enabled="false">
+      <proxy/>
+      <bypasslist/>
+      <module/>
+    </defaultProxy>
+  </system.net>
+  <appSettings>
+    <!--MSSQL Settings-->
+    <add key="DBServer" value="{{mssql_host}}" />
+    <add key="DBName" value="{{ mssql_dbname }}" />
+    <add key="DBLogin" value="{{ mssql_username }}" />
+    <add key="DBPassword" value="{{ mssql_password }}" />
+    <add key="DBReplicationServer" value="{{mssql_host}}" />
+    <add key="DBReplicationName" value="{{mssql_replica}}" />
+    <!--MSSQL Settings-->
+
+    <!--Log Settings-->
+    <add key="LogFolder" value="c:\log2" />
+    <!--End Log Settings-->
+
+    <!--BTP Settings-->
+    <add key="BTPSMTPServer" value="post.webtours.ru" />
+    <add key="BTPSMTPLogin" value="hotel@btp4.ru"/>
+    <add key="BTPSMTPPassword" value="bhjUY98"/>
+    <!--End BTP Settings-->
+
+    <!--ReserveMaster Settings-->
+    <add key="RMServiceUrl" value="http://api.reservmaster.ru" />
+    <add key="RMProtocolVersion" value="v1"/>
+
+    <add key="RMUserId" value="3005"/>
+    <add key="RMPassword" value="df4l3eh7mbcvq"/>
+
+    <add key="RMUserIdCbt" value="3329"/>
+    <add key="RMPasswordCbt" value="df34g278kgsaq"/>
+
+    <add key="RMUserIdGCBO" value="3354"/>
+    <add key="RMPasswordGCBO" value="13vfzgjytltkmybr"/>
+
+    <add key="RMTestUserId" value="0744"/>
+    <add key="RMTestPassword" value="echu3hf938dh30dg"/>
+    <!--End ReserveMaster Settings-->
+
+    <!--Hotels PRO Settings-->
+    <add key="HPROSvcUrl" value="https://api2.hotelspro.com/api" />
+    <add key="HPROSvcUrlTest" value="https://api-test.hotelspro.com/api"/>
+    <add key="HPROProtocolVersion" value="v2"/>
+
+    <add key="HPROLogin" value="Cbooking" />
+    <add key="HPROPassword" value="2ouDjFcy0Rvbv9Wu"/>
+    <add key="HPROLoginEUR" value="Cbooking_EUR_DISABLED"/>
+    <add key="HPROPasswordEUR" value="sClN0ho7AqtZDPl8"/>
+    <add key="HPROLoginTest" value="Cbooking"/>
+    <add key="HPROPasswordTest" value="rM53ebhsKpdZwHLa"/>
+
+    <add key="HPROStaticSvcUrl" value="http://cosmos.metglobal.tech/api/static"/>
+    <add key="HPROStaticProtocolVersion" value="v1"/>
+    <add key="HPROStaticLogin" value="CbookingCosmos"/>
+    <add key="HPROStaticPassword" value="N7rB5IVW0M7tWZD7"/>
+    <!--End Hotels PRO Settings-->
+
+    <!--Sirena Egopay Settings-->
+    <add key="SirenaServiceUrl" value="https://ws.egopay.ru/order/v2/"/>
+    <add key="SirenaShopId_CBO" value="100"/>
+    <add key="SirenaShopId_Cbooking" value="101"/>
+    <add key="SirenaShopId_CbookingTechnology" value="7642"/>
+
+    <add key="SirenaLogin" value="cbooking"/>
+    <add key="SirenaPassword" value="iCPNVcR06M"/>
+
+    <add key="SirenaTestServiceUrl" value="https://tws.egopay.ru/order/v2/"/>
+    <add key="SirenaTestShopId_CBO" value="10"/>
+    <add key="SirenaTestShopId_Cbooking" value="10"/>
+    <add key="SirenaTestShopId_CbookingTechnology" value="10"/>
+
+    <add key="SirenaTestLogin" value="cbooking"/>
+    <add key="SirenaTestPassword" value="E4MkEysoFH"/>
+    <!--End Sirena Egopay Settings-->
+
+    <!--Email Adreses Settings-->
+    <add key="EmailSupport" value="support@cbooking.ru" />
+    <add key="EmailNoreply" value="noreply@cbooking.ru"/>
+    <add key="EmailInformer" value="reservation.informer@cbooking.ru"/>
+    <add key="EmailInfo" value="info@cbooking.ru"/>
+    <add key="EmailInfo2" value="info2@cbooking.ru"/>
+    <add key="EmailDogovor" value="dogovor@cbooking.ru"/>
+    <add key="EmailZakaz" value="zakaz@cbooking.ru"/>
+    <add key="EmailFinances" value="finances@cbooking.ru"/>
+    <add key="EmailContent" value="content@cbooking.ru"/>
+    <add key="EmailOnline" value="online@cbooking.ru"/>
+    <add key="EmailSales" value="sales@cbooking.ru"/>
+    <!--End Email Adreses Settings-->
+  </appSettings>
+  <connectionStrings/>
+  
+  <system.web>
+    <!-- 
+            Set compilation debug="true" to insert debugging 
+            symbols into the compiled page. Because this 
+            affects performance, set this value to true only 
+            during development.
+        -->
+    <compilation debug="true" targetFramework="4.0"/>
+    <!--
+            The <authentication> section enables configuration 
+            of the security authentication mode used by 
+            ASP.NET to identify an incoming user. 
+        -->
+    <authentication mode="Windows"/>
+    <!--
+            The <customErrors> section enables configuration 
+            of what to do if/when an unhandled error occurs 
+            during the execution of a request. Specifically, 
+            it enables developers to configure html error pages 
+            to be displayed in place of a error stack trace.
+
+        <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+            <error statusCode="403" redirect="NoAccess.htm" />
+            <error statusCode="404" redirect="FileNotFound.htm" />
+        </customErrors>
+        -->
+    <pages controlRenderingCompatibilityVersion="3.5" clientIDMode="AutoID"/>
+  </system.web>
+  <!-- 
+        The system.webServer section is required for running ASP.NET AJAX under Internet
+        Information Services 7.0.  It is not necessary for previous version of IIS.
+    -->
+</configuration>

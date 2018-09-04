@@ -188,10 +188,15 @@
               src: backoffice_cbasicglobal.php.j2
               dest: "C:\\inetpub\\wwwroot\\BackOffice\\include\\cbasicglobal.php"
         
-    - name: Copy configuration file Web.config
+    - name: Copy configuration file Web.config for cbooking.ru
       win_template:
               src: cbooking_web_config.j2
               dest: "C:\\inetpub\\wwwroot\\CbookingWebsite\\Web.config"
+
+    - name: Copy configuration file Web.config for hdsgatewaylite
+      win_template:
+              src: hdsgatewaylite_web_config.j2
+              dest: "C:\\inetpub\\Applications\\hdsgatewaylite\\Web.config"
 
     - name: Copy configuration file for VBRunningService
       win_template:
