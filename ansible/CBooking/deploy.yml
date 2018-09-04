@@ -201,7 +201,7 @@
     - name: Copy configuration file Web.config for ast.cbooking.ru
       win_template:
               src: ast_web_config.j2
-              dest: "C:\\inetpub\\wwwroot\\ast.cbooking.ru"
+              dest: "C:\\inetpub\\wwwroot\\ast.cbooking.ru\\Web.config"
     
     - name: Copy configuration file Web.config for DBExporter
       win_template:
