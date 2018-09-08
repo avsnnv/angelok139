@@ -29,6 +29,7 @@ Move-Item -Force C:\temp\hotelgateway c:\inetpub\Applications
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\ast.cbooking.ru
 mkdir C:\inetpub\wwwroot\ast.cbooking.ru
 Move-Item -Force C:\temp\Style\ast.cbookng.ru\Publish\* C:\inetpub\wwwroot\ast.cbooking.ru
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\BackOffice
 mkdir C:\inetpub\wwwroot\BackOffice
 Move-Item -Force C:\temp\BackOffice\* C:\inetpub\wwwroot\BackOffice
 Stop-Service VBRunningService
