@@ -1,3 +1,4 @@
+Stop-Service VBRunningService
 Remove-Item -Recurse -Force c:\temp
 New-Item c:\temp -ItemType Directory
 
@@ -32,7 +33,6 @@ Move-Item -Force C:\temp\Style\ast.cbookng.ru\Publish\* C:\inetpub\wwwroot\ast.c
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\BackOffice
 mkdir C:\inetpub\wwwroot\BackOffice
 Move-Item -Force C:\temp\BackOffice\* C:\inetpub\wwwroot\BackOffice
-Stop-Service VBRunningService
 Remove-Item -Force -Recurse "C:\Program Files (x86)\Vitus Bering"
 mkdir "C:\Program Files (x86)\Vitus Bering"
 Move-Item -Force C:\temp\VBRunningServiceSQL "C:\Program Files (x86)\Vitus Bering"
