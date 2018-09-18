@@ -20,12 +20,15 @@ Copy-Item Most.Core.HotelBook.Gateway.WCF\Web.$Release.config Most.Core.HotelBoo
 Remove-Item -force Most.Core.HotelHub.WCF\Web.config
 Copy-Item Most.Core.HotelHub.WCF\Web.$Release.config Most.Core.HotelHub.WCF\Web.config
 
+Remove-Item -force Most.Core.HotelbookMapper\bin\$Release\Most.Core.HotelbookMapper.exe.config
+Copy-Item Most.Core.HotelbookMapper\App.$Release.config Most.Core.HotelbookMapper\bin\$Release\Most.Core.HotelbookMapper.exe.config
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.CBooking.API\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.CBooking.WinServices\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.SettingsService\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.HotelBook.Gateway.WCF\
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.HotelHub.WCF\
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename Most.Core.HotelbookMapper\
 copy $Filename c:\AutoDeploy\ftp_root
 
 Remove-Item -force c:\AutoDeploy\ftp_root\Most.Core.CBooking.API.Last.$Release
