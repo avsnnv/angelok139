@@ -1,4 +1,4 @@
-﻿param([String]$Release,[String]$path_CBookingApi,$path_services,$path_HotelHub, [Boolean]$runHotelMapper)
+﻿param([String]$Release,[String]$path_CBookingApi,$path_services,$path_HotelHub, $runHotelMapper)
 remove-item $path_CBookingApi -recurse -force
 mkdir $path_CBookingApi
 
@@ -8,7 +8,7 @@ remove-item $path_HotelHub -recurse -force
 mkdir $path_HotelHub
 
 Move-Item c:\temp\Most.Core.HotelHub.WCF\* $path_HotelHub\
-if($runHotelMapper ){
+if($runHotelMapper -eq "1" ){
     echo "Run HotelMapper"
     c:\temp\Most.Core.HotelbookMapper\bin\$Release\Most.Core.HotelbookMapper.exe
 }
