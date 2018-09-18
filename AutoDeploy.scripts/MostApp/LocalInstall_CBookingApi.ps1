@@ -9,8 +9,9 @@ mkdir $path_HotelHub
 
 Move-Item c:\temp\Most.Core.HotelHub.WCF\* $path_HotelHub\
 if($runHotelMapper -eq "1" ){
-    echo "Run HotelMapper"
-    c:\temp\Most.Core.HotelbookMapper\bin\$Release\Most.Core.HotelbookMapper.exe
+    echo "Run HotelMapper on $Release"
+    $cmd = "c:\temp\Most.Core.HotelbookMapper\bin\" + $Release+ "\Most.Core.HotelbookMapper.exe"
+    & $cmd
 }
 else{
     echo "HotelMapper dont run"
