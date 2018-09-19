@@ -9,8 +9,7 @@ cd c:\temp\
 
 Stop-Service W3SVC
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
-mkdir C:\inetpub\wwwroot\CbookingWebsite
-Move-Item -Force C:\temp\CbookingWebsite\* C:\inetpub\wwwroot\CbookingWebsite
+Move-Item -Force C:\temp\CbookingWebsite C:\inetpub\wwwroot
 Remove-Item -Recurse -Force C:\inetpub\Applications
 mkdir c:\inetpub\Applications
 mkdir c:\log
