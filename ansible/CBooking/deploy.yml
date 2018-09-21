@@ -83,7 +83,12 @@
               dest: c:\InstallScript.ps1
 
     - name: Run Install Script
-      win_shell: c:\InstallScript.ps1
+      win_command: c:\InstallScript.ps1
+      register: install_out
+    
+    - name: Print result of install_out
+      debug:
+        var: install_out
 
     - name: Copy configuration file cbasicglobal.php
       win_template:
