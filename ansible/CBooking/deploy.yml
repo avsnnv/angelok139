@@ -83,7 +83,7 @@
               dest: c:\InstallScript.ps1
 
     - name: Run Install Script
-      win_command: c:\InstallScript.ps1
+      win_command: powershell c:\InstallScript.ps1
       register: install_out
     
     - name: Print result of install_out
