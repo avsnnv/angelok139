@@ -9,7 +9,9 @@ cd c:\temp\
 
 Stop-Service W3SVC
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\CbookingWebsite
 Move-Item -Force C:\temp\CbookingWebsite C:\inetpub\wwwroot
+Remove-Item -Recurse -Force C:\inetpub\Applications
 Remove-Item -Recurse -Force C:\inetpub\Applications
 mkdir c:\inetpub\Applications
 mkdir c:\log
@@ -27,14 +29,18 @@ Move-Item -Force C:\temp\hdsorderfo2 c:\inetpub\Applications
 Move-Item -Force C:\temp\hdssvc c:\inetpub\Applications
 Move-Item -Force C:\temp\hotelgateway c:\inetpub\Applications
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\ast.cbooking.ru
+Remove-Item -Recurse -Force C:\inetpub\wwwroot\ast.cbooking.ru
 mkdir C:\inetpub\wwwroot\ast.cbooking.ru
 Move-Item -Force C:\temp\Style\ast.cbookng.ru\Publish\* C:\inetpub\wwwroot\ast.cbooking.ru
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\BackOffice
 Remove-Item -Recurse -Force C:\inetpub\wwwroot\BackOffice
 Move-Item -Force C:\temp\BackOffice C:\inetpub\wwwroot\
+Get-Process DbExporterConsole|Stop-Process -Force
+Remove-Item -Force -Recurse "C:\Program Files (x86)\Vitus Bering"
 Remove-Item -Force -Recurse "C:\Program Files (x86)\Vitus Bering"
 mkdir "C:\Program Files (x86)\Vitus Bering"
 Move-Item -Force C:\temp\VBRunningServiceSQL "C:\Program Files (x86)\Vitus Bering"
+Remove-Item -Force -Recurse "C:\Program Files\DBExporter"
 Remove-Item -Force -Recurse "C:\Program Files\DBExporter"
 mkdir "C:\Program Files\DBExporter"
 Move-Item -Force C:\temp\DBExporterConsole\DBExporterConsole\bin\Release\* "C:\Program Files\DBExporter"
