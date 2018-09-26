@@ -55,28 +55,6 @@
         state: present
 
 
-    - name: Create firewall rule for MySQL
-      win_firewall_rule:
-              name: MySQL
-              localport: 3306
-              action: allow
-              remoteip: "194.84.22.2,127.0.0.1"
-              direction: in
-              protocol: tcp
-              state: present
-              enabled: yes
-
-    - name: Create firewall rule for WinRM
-      win_firewall_rule:
-              name: WinRM
-              localport: 5985
-              action: allow
-              remoteip: 188.65.211.36
-              direction: in
-              protocol: tcp
-              state: present
-              enabled: yes
-
     - name: Copy Install script
       win_template:
               src: files/InstallScript.ps1.j2
