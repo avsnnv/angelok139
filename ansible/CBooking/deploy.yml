@@ -29,10 +29,6 @@
               include_sub_features: True
               include_management_tools: true
 
-    - name: Remove SMB v1
-      win_feature:
-              name: FS-SMB1
-              state: absent
 
 
     - name: Install PHP
