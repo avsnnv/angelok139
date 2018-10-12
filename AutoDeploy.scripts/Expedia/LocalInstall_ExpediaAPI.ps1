@@ -11,4 +11,5 @@ $hostname = (hostname| Out-String).Replace("`r`n","")
 mkdir $path_ExpediaAPI
 robocopy Expedia.Core.Api $path_ExpediaAPI /E 
 
-
+Remove-Item -Force -Recurse C:\inetpub\wwwroot\services\ExpediaReferenceService
+Move-Item Expedia.Core.ReferenceService C:\inetpub\wwwroot\services\ExpediaReferenceService
