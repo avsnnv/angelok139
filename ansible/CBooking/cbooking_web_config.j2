@@ -101,7 +101,8 @@
     <add key="HotelBookServiceUrl" value="http://{{ HotelBookApi }}:5030/HotelBookGateway.WCF/HotelBookGatewayService.svc" />
     <add key="HotelBookSearchTimeout" value="20000" />
     <!--HotelBook Settings-->
-    
+
+    <add key="DBMultiSubnetFailover" value="{{ClusterEnabled}}"/>    
   </appSettings>
   <webReferences configSource="App_Data\Config\WebReferences.config" />
   <location path="." inheritInChildApplications="false">
