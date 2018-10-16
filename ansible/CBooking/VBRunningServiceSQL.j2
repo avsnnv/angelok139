@@ -20,34 +20,34 @@
     <!--BTP Settings-->
     <add key="BTPSMTPServer" value="post.webtours.ru" />
     <add key="BTPSMTPLogin" value="hotel@btp4.ru" />
-    <add key="BTPSMTPPassword" value="bhjUY98" />
+    <add key="BTPSMTPPassword" value="{{BTPSMTPPassword}}" />
     <!--End BTP Settings-->
     <!--ReserveMaster Settings-->
     <add key="RMServiceUrl" value="http://api.reservmaster.ru" />
     <add key="RMProtocolVersion" value="v1" />
     <add key="RMUserId" value="3005" />
-    <add key="RMPassword" value="df4l3eh7mbcvq" />
+    <add key="RMPassword" value="{{RMPassword}}" />
     <add key="RMUserIdCbt" value="3329" />
-    <add key="RMPasswordCbt" value="df34g278kgsaq" />
+    <add key="RMPasswordCbt" value="{{RMPasswordCbt}}" />
     <add key="RMUserIdGCBO" value="3354" />
-    <add key="RMPasswordGCBO" value="13vfzgjytltkmybr" />
+    <add key="RMPasswordGCBO" value="{{RMPasswordGCBO}}" />
     <add key="RMTestUserId" value="0744" />
-    <add key="RMTestPassword" value="echu3hf938dh30dg" />
+    <add key="RMTestPassword" value="{{RMTestPassword}}" />
     <!--End ReserveMaster Settings-->
     <!--Hotels PRO Settings-->
     <add key="HPROSvcUrl" value="https://api-proxy.hotelspro.com/api" />
     <add key="HPROSvcUrlTest" value="https://api-test.hotelspro.com/api" />
     <add key="HPROProtocolVersion" value="v2" />
     <add key="HPROLogin" value="Cbooking" />
-    <add key="HPROPassword" value="2ouDjFcy0Rvbv9Wu" />
+    <add key="HPROPassword" value="{{HPROPassword}}" />
     <add key="HPROLoginEUR" value="Cbooking_EUR" />
-    <add key="HPROPasswordEUR" value="sClN0ho7AqtZDPl8" />
+    <add key="HPROPasswordEUR" value="{{HPROPasswordEUR}}" />
     <add key="HPROLoginTest" value="Cbooking" />
-    <add key="HPROPasswordTest" value="rM53ebhsKpdZwHLa" />
+    <add key="HPROPasswordTest" value="{{HPROPasswordTest}}" />
     <add key="HPROStaticSvcUrl" value="http://cosmos.metglobal.tech/api/static" />
     <add key="HPROStaticProtocolVersion" value="v1" />
     <add key="HPROStaticLogin" value="CbookingCosmos" />
-    <add key="HPROStaticPassword" value="N7rB5IVW0M7tWZD7" />
+    <add key="HPROStaticPassword" value="{{HPROPasswordTest}}" />
     <!--End Hotels PRO Settings-->
     <!--Sirena Egopay Settings-->
     <add key="SirenaServiceUrl" value="https://ws.egopay.ru/order/v2/" />
@@ -55,13 +55,13 @@
     <add key="SirenaShopId_Cbooking" value="101" />
     <add key="SirenaShopId_CbookingTechnology" value="7642" />
     <add key="SirenaLogin" value="cbooking" />
-    <add key="SirenaPassword" value="iCPNVcR06M" />
+    <add key="SirenaPassword" value="{{SirenaPassword}}" />
     <add key="SirenaTestServiceUrl" value="https://secure.sirena2000.ru/ws/order/v2/" />
     <add key="SirenaTestShopId_CBO" value="10"/>
     <add key="SirenaTestShopId_Cbooking" value="10"/>
     <add key="SirenaTestShopId_CbookingTechnology" value="10"/>
     <add key="SirenaTestLogin" value="cbooking" />
-    <add key="SirenaTestPassword" value="E4MkEysoFH" />
+    <add key="SirenaTestPassword" value="{{SirenaTestPassword}}" />
     <!--End Sirena Egopay Settings-->
 
     <!--Email Adreses Settings-->
@@ -83,23 +83,23 @@
     <add key="SecondSMTPServer" value="smtp.tebe.ru" />
     <add key="SecondSMTPServerPort" value="25" />
     <add key="SecondSMTPLogin" value="cbooking@smtp.tebe.ru" />
-    <add key="SecondSMTPPassword" value="jUQjenldPCk" />
+    <add key="SecondSMTPPassword" value="{{SecondSMTPPassword}}" />
     <add key="SMTPFromName" value="noreply@cbooking.ru" />
 
     <add key="SMTPServer" value="smtp.mostapp.com" />
     <add key="SMTPServerPort" value="25" />
     <add key="SMTPLogin" value="cbooking" />
-    <add key="SMTPPassword" value="D8ebD3uJEqXdNZFE" />
+    <add key="SMTPPassword" value="{{SMTPPassword}}" />
     <add key="SMTPUseSsl" value="true" />
     <add key="SecondSMTPUseSsl" value="false"/>
 
     <add key="YandexSMTPServer" value="smtp.yandex.ru" />
     <add key="YandexSMTPServerPort" value="25" />
     <add key="YandexSMTPLogin" value="noreply@cbooking.ru" />
-    <add key="YandexSMTPPassword" value="7dk5hge" />
+    <add key="YandexSMTPPassword" value="{{YandexSMTPPassword}}" />
     <add key="BuhDocFtpServer" value="ftp://84.21.229.142" />
     <add key="BuhDocFtpLogin" value="ftp-buh" />
-    <add key="BuhDocFtpPassword" value="iu76GTyh" />
+    <add key="BuhDocFtpPassword" value="{{BuhDocSMTP}}" />
     
     <!--Failover Settings-->
     <add key="MaxFailoverSwitchSeconds" value="300"/>
@@ -108,7 +108,7 @@
     <!--Selectel Settings-->
     <add key="SelectelBaseUrl" value="https://api.selcdn.ru"/>
     <add key="SelectelLogin" value="82775_cbooking_app"/>
-    <add key="SelectelPassword" value="73VYD3zqog"/>
+    <add key="SelectelPassword" value="{{SelectelPassword}}"/>
     <add key="SelectelAuthPath" value="v2.0/tokens"/>
     <add key="SelectelContainerPath" value="v1/SEL_82775/cbooking_app"/>
     <!--End Selectel Settings-->
