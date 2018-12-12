@@ -84,6 +84,11 @@
               src: hdsgatewaylite_web_config.j2
               dest: "C:\\inetpub\\Applications\\hdsgatewaylite\\Web.config"
 
+    - name: Copy configuration file Web.config for hdswebapi
+      win_template:
+              src: hdswebapi_web_config.j2
+              dest: "C:\\inetpub\\Applications\\hdswebapi\\Web.config"
+
     - name: Copy configuration file Web.config for ast.cbooking.ru
       win_template:
               src: ast_web_config.j2
@@ -169,6 +174,7 @@
         - hdswebsite
         - hotelgateway
         - hdsgatewaylite
+        - hdswebapi
 
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
