@@ -5,7 +5,8 @@ echo "Prepare and Archive Distributive for $Release enviropment to $Filename"
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename CbookingWebsite
 Move-Item hdsorderfo hdsorderfo2
 Move-Item hdsorderfo_old hdsorderfo
-& "C:\Program Files\7-Zip\7z.exe" a $Filename hdswebsite 
+& "C:\Program Files\7-Zip\7z.exe" a $Filename hdswebsite
+& "C:\Program Files\7-Zip\7z.exe" a $Filename hdswebapi 
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdscontent
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdssvc
 & "C:\Program Files\7-Zip\7z.exe" a $Filename hdsbo
