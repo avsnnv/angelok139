@@ -1,2 +1,6 @@
 [app]
 5.189.231.98
+
+[app:vars]
+CurrentHost=haserver3.mostapp.com
+

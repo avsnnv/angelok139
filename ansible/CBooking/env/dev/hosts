@@ -1,3 +1,5 @@
 [app]
 95.213.153.212 
 
+[app:vars]
+CurrentHost=cbooking.mostapp.com
