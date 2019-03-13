@@ -1491,7 +1491,7 @@ session.gc_divisor = 1000
 ; After this number of seconds, stored data will be seen as 'garbage' and
 ; cleaned up by the garbage collection process.
 ; http://php.net/session.gc-maxlifetime
-session.gc_maxlifetime = 1440
+session.gc_maxlifetime = 65535
 
 ; NOTE: If you are using the subdirectory option for storing session files
 ;       (see session.save_path above), then garbage collection does *not*
@@ -2005,7 +2005,6 @@ max_input_time = 600
 memory_limit = 1.99G 
 post_max_size = 0 
 upload_max_filesize = 999M 
-session.gc_maxlifetime = 21600 
 default_socket_timeout = 600
 
 [WebPIChanges]
