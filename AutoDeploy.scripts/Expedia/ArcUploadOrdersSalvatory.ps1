@@ -12,6 +12,8 @@ echo "Prepare service config"
 Remove-Item -force OrdersSalvatory.Core.GatherExpediaOrder\bin\$Release\OrdersSalvatory.Core.GatherExpediaOrder.exe.config
 Copy-Item OrdersSalvatory.Core.GatherExpediaOrder\App.$Release.config OrdersSalvatory.Core.GatherExpediaOrder\bin\$Release\OrdersSalvatory.Core.GatherExpediaOrder.exe.config
 
+Remove-Item -force OrdersSalvatory.Core.BuhOrderCollector\bin\$Release\OrdersSalvatory.Core.BuhOrderCollector.exe.config
+Copy-Item OrdersSalvatory.Core.BuhOrderCollector\App.$Release.config OrdersSalvatory.Core.BuhOrderCollector\bin\$Release\OrdersSalvatory.Core.BuhOrderCollector.exe.config
 
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename OrdersSalvatory.Core.OutputOrdersWCF
 & "C:\Program Files\7-Zip\7z.exe" a -r $Filename OrdersSalvatory.Core.GatherExpediaOrder
