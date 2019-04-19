@@ -2,13 +2,13 @@
 
 echo "Prepare and Archive Distributive for $Release enviropment to $Filename"
 
-cd CBooking.MetaHotelHub
+cd CBooking.MetaHotelHub\CBooking.MetaHotelHub.API
 Remove-Item -force Web.config
 Copy-Item Web.$Release.config Web.config
 cd ..
 
 
-& "C:\Program Files\7-Zip\7z.exe" a -r $Filename CBooking.MetaHotelHub
+& "C:\Program Files\7-Zip\7z.exe" a -r $Filename CBooking.MetaHotelHub.API
 
 Move-Item $Filename c:\AutoDeploy\ftp_root
 Remove-Item -force c:\AutoDeploy\ftp_root\OrdersSalvatory.Last.$Enviropment
