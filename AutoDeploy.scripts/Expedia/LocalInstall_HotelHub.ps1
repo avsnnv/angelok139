@@ -2,6 +2,6 @@
 
 cd c:\temp
 
-mkdir $path_ExpediaAPI
-robocopy CBooking.MetaHotelHub.API $path_ExpediaAPI /E 
+mkdir $path_HotelHubAPI
+robocopy CBooking.MetaHotelHub.API $path_HotelHubAPI /E 
 
