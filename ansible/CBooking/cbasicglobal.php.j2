@@ -83,7 +83,16 @@ public function GetAbsolutURLPlusVlojenie() // Завершение соедин
    return $this->Get_STR_HTTP().$this->absolut_url.$this->vlojenie;
 }
 
+public function GetURL_prosto()
+{
+    
+   return $this->absolut_url;
+}
 
+public function GetParamBD2()
+{
+   return $this->dop_local_bd;
+}
 }
 	
 ?>
