@@ -7,14 +7,17 @@
     machine.config.comments usually located in 
     \Windows\Microsoft.Net\Framework\v2.x\Config 
 -->
+
 <configuration>
   <appSettings>
+
     <!--Zabbix Settings-->
     <add key="ZabbixAddress" value="{{ ZabbixAddress }}" />
     <add key="ZabbixPort" value="{{ ZabbixPort }}" />
     <add key="ZabbixEnable" value="{{ ZabbixEnable }}" />
     <add key="ZabbixNet" value="{{ ZabbixNet }}" />
     <!--End Zabbix Settings-->
+  
   </appSettings>
   <connectionStrings/>
   <!--
@@ -76,6 +79,7 @@
       <service name="Service" behaviorConfiguration="ServiceBehavior">
         <!-- Service Endpoints -->
         <endpoint address="" binding="basicHttpBinding" contract="IService">
+          
           <!-- 
               address="" 
               Upon deployment, the following identity element should be removed or replaced to reflect the 
