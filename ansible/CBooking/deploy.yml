@@ -124,6 +124,11 @@
               src: VBRunningServiceSQL.j2
               dest: "C:\\Program Files (x86)\\Vitus Bering\\VbRunningServiceSQL\\bin\\Release\\VBRunningServiceSQL.exe.config"
 
+    - name: Copy configuration file Web.config for CalendarApi
+      win_template:
+              src: CalendarApi_web_config.j2
+              dest: "C:\\inetpub\\Applications\\CalendarApi\\Web.config"
+
     - name: Remove Default web Site
       win_iis_website:
         name: "Default Web Site"
@@ -195,6 +200,7 @@
         - hotelgateway
         - hdsgatewaylite
         - hdswebapi
+        - CalendarApi
 
     - name: Create firewall rule for CBooking website
       win_firewall_rule:
