@@ -24,6 +24,7 @@ Move-Item hdsorderfo_old hdsorderfo
 & "C:\Program Files\7-Zip\7z.exe" a $Filename DBExporterConsole
 & "C:\Program Files\7-Zip\7z.exe" a $Filename VBRunningServiceSQL
 & "C:\Program Files\7-Zip\7z.exe" a $Filename MailsheduleChecker
+& "C:\Program Files\7-Zip\7z.exe" a $Filename CalendarApi
 
 copy $Filename c:\AutoDeploy\ftp_root
 Remove-Item -force c:\AutoDeploy\ftp_root\CBooking.Last.$Enviropment
